@@ -3,6 +3,7 @@
             [keechma.toolbox.ui :refer [route>]]
             [basapp.datascript :refer [q> entity>]]
             [basapp.ui.inputs :as i]
+            [antizer.reagent :as ant]
             [keechma.toolbox.forms.ui :as forms-ui]
             [reagent.core :as r]))
 
@@ -17,7 +18,6 @@
 
 (defn render-form [ctx title data]
   (let [form-props [:employee :form]]
-    [:div.card-body
      [:form {:on-submit #(forms-ui/<submit ctx form-props %)}
       [render-form-errors ctx form-props]
       [i/text ctx form-props :uname {:placeholder "Korisničko ime" :disabled (not= (:id data) 0)}]
@@ -35,7 +35,7 @@
       [i/text ctx form-props :type {:placeholder "Kategorija"}]
       [i/text ctx form-props :position {:placeholder "Pozicija"}]
       [i/checkbox ctx form-props :active {:label "Aktivan"}]
-      [:button.btn.btn-primary "Snimi"]]]))
+      [:button.btn.btn-primary "Snimi"]]))
 
 
 (defn render [ctx]
@@ -48,12 +48,16 @@
               :departments (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :department/short-name]])
               :id      employee-id}]
     (if (:employee/name employee)
-      [:div.container.pt-5
-       [:p.mb-5 [:a {:href (ui/url ctx {:page "employees"})} "← Povratak na korisnike"]]
-       [:h3 (str (:employee/name employee) " " (:employee/last-name employee))]
-       [render-form ctx "" data]]
-      [:div.container.pt-5
-       [:p.mb-5  "Nije pronadjen korisnik"]])))
+      [:div
+       [ant/row
+        [ant/col {:span 8 :offset 1 :style {:padding-top "1em"}} [:a {:href (ui/url ctx {:page "employees"})} "← Povratak na korisnike"]]]
+       [ant/row
+        [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}} [:h3 (str (:employee/name employee) " " (:employee/last-name employee))]]]
+       [ant/row
+        [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}}
+         [render-form ctx "" data]]]]
+      [ant/row
+       [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}} "Nije pronadjen korisnik"]])))
 
 (def component
   (ui/constructor {:renderer          render
