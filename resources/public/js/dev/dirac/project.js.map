@@ -1,0 +1,1 @@
+{"version":3,"file":"\/C:\/Users\/Enes\/Desktop\/Projects\/bas\/bas-app\/resources\/public\/js\/dev\/dirac\/project.js","sources":["project.cljs?rel=1563552900253"],"lineCount":9,"mappings":";AAAA;;AAGA,AAAKA,wBAAQ;AAEb,oCAAA,pCAAMC;AAAN,AACED","names":["dirac.project\/version","dirac.project\/get-current-version"]}

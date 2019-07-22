@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Leiningen: keechma:0.3.13">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/keechma/keechma/0.3.13/keechma-0.3.13.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

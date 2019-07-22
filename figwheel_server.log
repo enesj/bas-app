@@ -1,0 +1,145 @@
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 3.232 seconds.
+notifying browser that file changed:  resources/public/js/dev/goog/deps.js
+notifying browser that file changed:  resources/public/js/dev/cljs_deps.js
+notifying browser that file changed:  resources\public\js\dev\basapp\controllers\datascript.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 5.192 seconds.
+notifying browser that file changed:  resources/public/js/dev/goog/deps.js
+notifying browser that file changed:  resources/public/js/dev/cljs_deps.js
+notifying browser that file changed:  resources\public\js\dev\basapp\domain\bas.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 3.135 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\domain\bas.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.568 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\controllers\user_actions.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.778 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\departments.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.56 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\departments.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.471 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\departments.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.26 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\departments.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.32 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\departments.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.505 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\departments.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.718 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\departments.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 3.391 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\domain\bas.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.293 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\forms\department.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.142 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\forms\department.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.05 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\departments.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 3.324 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\domain\bas.js
+notifying browser that file changed:  resources\public\js\dev\basapp\forms\department.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.782 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\domain\bas.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.215 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\controllers\user_actions.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.327 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\employee.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.07 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\employee.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.19 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\employee.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.795 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\domain\bas.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.687 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\domain\bas.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.639 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\domain\bas.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.662 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\domain\bas.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Failed to compile build :dev from ["src"] in 2.011 seconds.
+----  Could not Read  src/basapp/ui/employee.cljs   line:32 ----
+
+  C:\Users\Enes\Desktop\Projects\bas\basapp\src\basapp\ui\employee.cljs [line 32, col 29] The map literal starting with :options on line 29 column 8 contains 5 form(s). Map literals must contain an even number of forms.
+
+  30                     {:value (:db/id r) :label (:department/short-name r)}) (:departments data))
+  31    :input-type 
+  32    :label "Odjeljenje"}]
+        C:\Users\Enes\Desktop\Projects\bas\basapp\src\basapp\ui\employee.cljs [line 32, col 29] The map literal starting with :options on line 29 column 8 contains 5 form(s). Map literals must contain an even number of forms.
+  33  ;[i/select ctx form-props :sector
+  34  ; {:options (mapv (fn [r] {:value (:db/id r) :label (:sector/short-name r)}) (:sectors data))
+  35  ;  :label "Sektor"}]
+
+----  Reader Error : Please see src/basapp/ui/employee.cljs  ----
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.411 seconds.
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 1.82 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\employee.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.098 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\employee.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.217 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\employee.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.29 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\employee.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.519 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\employee.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.15 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\employee.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.557 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\employee.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.068 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\employee.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.302 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\employee.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.423 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\employee.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.643 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\domain\bas.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.646 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\domain\bas.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.237 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\controllers\datascript.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.237 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\controllers\datascript.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.04 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\forms\employee.js
+Compiling build :dev to "resources/public/js/app.js" from ["src"]...
+Successfully compiled build :dev to "resources/public/js/app.js" in 2.164 seconds.
+notifying browser that file changed:  resources\public\js\dev\basapp\ui\employee.js
