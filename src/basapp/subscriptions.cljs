@@ -15,4 +15,5 @@
    (:datascript @app-db-atom)))
 
 (def subscriptions
-  {:datascript get-datascript})
+  {:filter (get-kv :filter)
+   :datascript get-datascript})

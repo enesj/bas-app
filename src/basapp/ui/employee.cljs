@@ -8,18 +8,10 @@
             [reagent.core :as r]))
 
 
-
-(defn render-form-errors [ctx form-props]
-  (let [form-state (forms-ui/form-state> ctx form-props)]
-    (when (= :submit-failed (get-in form-state [:state :type]))
-      (let [e (ex-message (get-in form-state [:state :cause]))]
-        [:div.alert.alert-danger e]))))
-
-
 (defn render-form [ctx title data]
   (let [form-props [:employee :form]]
      [:form {:on-submit #(forms-ui/<submit ctx form-props %)}
-      [render-form-errors ctx form-props]
+      [i/render-errors ctx form-props]
       [i/text ctx form-props :uname {:placeholder "Korisničko ime" :disabled (not= (:id data) 0)}]
       [i/text ctx form-props :name {:placeholder "Ime"}]
       [i/text ctx form-props :last-name {:placeholder "Prezime"}]
@@ -28,9 +20,6 @@
        {:options (mapv (fn [r]
                          {:value (:db/id r) :label (:department/short-name r)}) (:departments data))
         :label "Odjeljenje"}]
-      ;[i/select ctx form-props :sector
-      ; {:options (mapv (fn [r] {:value (:db/id r) :label (:sector/short-name r)}) (:sectors data))
-      ;  :label "Sektor"}]
       [i/text ctx form-props :phone {:placeholder "Telefon"}]
       [i/text ctx form-props :type {:placeholder "Kategorija"}]
       [i/text ctx form-props :position {:placeholder "Pozicija"}]

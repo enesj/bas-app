@@ -23,7 +23,7 @@
 (defn insert-department [name short-name sector active]
   [{:department/name       name
     :department/short-name short-name
-    :department/sektor     (js/parseInt sector)
+    :department/sector     (js/parseInt sector)
     :department/active    active}])
 
 

@@ -1,6 +1,6 @@
 (ns basapp.ui.departments
   (:require [keechma.ui-component :as ui]
-            [keechma.toolbox.ui :refer [<cmd route>]]
+            [keechma.toolbox.ui :refer [<cmd route> sub>]]
             [basapp.datascript :refer [q> entity>]]
             [basapp.ui.inputs :as i]
             [keechma.toolbox.forms.ui :as forms-ui]
@@ -19,7 +19,7 @@
 (defn columns [ctx data]
   ;(js/console.log "data" data)
   [{:title "Ime" :dataIndex "name" :sorter #(comparison %1 %2 :name)
-    :render #(r/as-element [:a {:href (ui/url ctx {:page "departments" :id ((js->clj %2) "id")})} %1])}
+    :render #(r/as-element [:a {:href (ui/url ctx {:page "department" :id ((js->clj %2) "id")})} %1])}
    {:title "Oznaka" :dataIndex "short-name" :sorter #(comparison %1 %2 :short-name)}
    {:title "Sektor" :dataIndex "sektor" :sorter #(comparison %1 %2 :sektor)
     :render #(r/as-element (:sector/short-name (first (filter (fn [x] (= (:db/id x) %1)) (:sectors data)))))}
@@ -33,11 +33,7 @@
                  :show-total #(str "Ukupno: " % " odjeljenja")})
 
 (defn departments-table [ctx data]
-  (let [departments
-        (q> ctx
-            '[:find [(pull ?e [* ]) ...]
-              :in $
-              :where [?e :department/short-name]])]
+  (let [departments (:departments data)]
     [:div
      [:h2 "Odjeljenja"]
      [ant/table
@@ -46,30 +42,11 @@
        :row-selection
        {:on-change
         #(let [selected (js->clj %2 :keywordize-keys true)]
-           (<cmd ctx [:user-actions :employees-filter] {:departments (:id (first selected))})
+           (<cmd ctx [:user-actions :filter] ["department" (mapv :id selected)])
            (ant/message-info (str "Izabrali ste: " (map :name selected))))}}]]))
 
-(defn render-form-errors [ctx form-props]
-  (let [form-state (forms-ui/form-state> ctx form-props)]
-    (when (= :submit-failed (get-in form-state [:state :type]))
-      (let [e (ex-message (get-in form-state [:state :cause]))]
-        [:div.alert.alert-danger e]))))
-
-(defn render-form [ctx title data]
-  (let [form-props [:department :form]]
-    [:div.card-body
-     [:form {:on-submit #(do (forms-ui/<submit ctx form-props %))}
-      [render-form-errors ctx form-props]
-      [i/text ctx form-props :short-name {:placeholder "Oznaka" :disabled (not= (:id data) 0)}]
-      [i/text ctx form-props :name {:placeholder "Ime"}]
-      [i/select ctx form-props :sector
-       {:options (mapv (fn [r] {:value (:db/id r) :label (:sector/short-name r)}) (:sectors data))
-        :label "Sektor"}]
-      [i/checkbox ctx form-props :active {:label "Aktivan"}]
-      [:button.btn.btn-primary "Snimi"]]]))
-
 (defn render [ctx]
-  (let [selection (atom ())
+  (let [selection (sub> ctx :filter)
         department-id (:id (route> ctx))
         department-title (cond
                            (= department-id 0) {:department/name "Novo" :department/short-name "odjeljenje"}
@@ -79,20 +56,21 @@
               :departments (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :department/short-name]])
               :id      department-id
               :selection selection}]
-    [:div.container.pt-5
-     [:p.mb-5 [:a {:href (ui/url ctx {:page "dashboard"})} "← Povratak na naslovnicu"]]
-     [departments-table ctx data]
-     (when (:department/name department-title)
-       (forms-ui/<call ctx [:department :form] :reset-form)
-       [:div.container.pt-5
-        [:h3 (str (:department/name department-title) " " (:department/short-name department-title))]
-        [render-form ctx "" data]])
-     (when (empty? @selection)
+    [:div
+     [ant/row
+      [ant/col {:span 8 :offset 1 :style {:padding-top "1em"}}
+       [:a {:href (ui/url ctx {:page "dashboard"})} "← Povratak na naslovnicu"]]]
+     [ant/row
+      [ant/col {:span 12 :offset 4 :style {:padding-top "1em"}}
+       [departments-table ctx data]]]
+     (when (not-empty selection)
        [(ui/component ctx :employees)])]))
+
+
 
 
 (def component
   (ui/constructor {:renderer render
-                   :subscription-deps [:datascript]
+                   :subscription-deps [:datascript :filter]
                    :component-deps [:employees]}))
 
