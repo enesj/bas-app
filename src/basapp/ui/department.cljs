@@ -18,7 +18,10 @@
        {:options (mapv (fn [r] {:value (:db/id r) :label (:sector/short-name r)}) (:sectors data))
         :label "Sektor"}]
       [i/checkbox ctx form-props :active {:label "Aktivan"}]
-      [:button.btn.btn-primary "Snimi"]]]))
+      [:button.btn.btn-primary "Snimi"]
+      [:button.btn.btn-secondary {:style {:margin-left "0.5em"}
+                                  :on-click #(do (.preventDefault %)
+                                                 (ui/redirect ctx {:page "departments"}))} "Odustani"]]]))
 
 (defn render [ctx]
   (let [department-id (:id (route> ctx))
@@ -40,7 +43,7 @@
          [render-form ctx "" data]]]
        [(ui/component ctx :employees)]]
       [ant/row
-       [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}} "Nije pronadjeno odjeljenje"]])))
+       [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}} [:h3 (str "Ne postoji odjeljenje "  department-id)]]])))
 
 
 

@@ -17,12 +17,11 @@
 
 
 (defn columns [ctx data]
-  ;(js/console.log "data" data)
   [{:title "Ime" :dataIndex "name" :sorter #(comparison %1 %2 :name)
     :render #(r/as-element [:a {:href (ui/url ctx {:page "department" :id ((js->clj %2) "id")})} %1])}
    {:title "Oznaka" :dataIndex "short-name" :sorter #(comparison %1 %2 :short-name)}
-   {:title "Sektor" :dataIndex "sektor" :sorter #(comparison %1 %2 :sektor)
-    :render #(r/as-element (:sector/short-name (first (filter (fn [x] (= (:db/id x) %1)) (:sectors data)))))}
+   {:title "Sektor" :dataIndex "sector" :sorter #(comparison %1 %2 :sector)
+    :render #(r/as-element (:sector/short-name (first (filter (fn [x] (= (:db/id x) ((js->clj %1) "id"))) (:sectors data)))))}
    {:title "Aktivan" :dataIndex "active" :sorter #(comparison %1 %2 :active)
     :filters [{:text "Da"  :value true }, { :text "Ne" :value false }],
     :onFilter (fn [value, record] (= (str (.-active record))  value))

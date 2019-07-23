@@ -11,7 +11,7 @@
      [ant/col {:span 8 :offset 2}
       [:a.row {:href (ui/url ctx {:page "sectors"})} "Sektori"]]]
     [ant/row
-     [ant/col {:span 8 :offset 2 }
+     [ant/col {:span 8 :offset 2}
       [:a.row {:href (ui/url ctx {:page "departments"})} "Odjeljenja"]]]])
 
 

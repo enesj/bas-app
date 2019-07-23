@@ -15,7 +15,10 @@
       [i/text ctx form-props :short-name {:placeholder "Oznaka" :disabled (not= data 0)}]
       [i/text ctx form-props :name {:placeholder "Ime"}]
       [i/checkbox ctx form-props :active {:label "Aktivan"}]
-      [:button.btn.btn-primary "Snimi"]]]))
+      [:button.btn.btn-primary "Snimi"]
+      [:button.btn.btn-secondary {:style {:margin-left "0.5em"}
+                                  :on-click #(do (.preventDefault %)
+                                                 (ui/redirect ctx {:page "sectors"}))} "Odustani"]]]))
 
 (defn render [ctx]
   (let [sector-id (:id (route> ctx))
@@ -38,7 +41,7 @@
          [render-form ctx "" data]]]
        [(ui/component ctx :employees)]]
       [ant/row
-       [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}} "Nije pronadjen sektor"]])))
+       [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}} [:h3 (str "Ne postoji sektor "  sector-id)]]])))
 
 (def component
   (ui/constructor {:renderer          render

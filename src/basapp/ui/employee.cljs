@@ -24,7 +24,10 @@
       [i/text ctx form-props :type {:placeholder "Kategorija"}]
       [i/text ctx form-props :position {:placeholder "Pozicija"}]
       [i/checkbox ctx form-props :active {:label "Aktivan"}]
-      [:button.btn.btn-primary "Snimi"]]))
+      [:button.btn.btn-primary "Snimi"]
+      [:button.btn.btn-secondary {:style {:margin-left "0.5em"}
+                                  :on-click #(do (.preventDefault %)
+                                                 (ui/redirect ctx {:page "employees"}))} "Odustani"]]))
 
 
 (defn render [ctx]
@@ -46,7 +49,7 @@
         [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}}
          [render-form ctx "" data]]]]
       [ant/row
-       [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}} "Nije pronadjen korisnik"]])))
+       [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}} [:h3 (str "Ne postoji korisnik "  employee-id)]]])))
 
 (def component
   (ui/constructor {:renderer          render

@@ -22,6 +22,7 @@
 
 
 
+
 (defrecord Form [validator])
 
 (defmethod forms-core/get-data Form [_ app-db form-props]
@@ -32,16 +33,17 @@
 
 (defmethod forms-core/submit-data Form [_ app-db _ data]
   (pipeline! [value app-db]
-             (ds/transact!
-                        (insert-employee (:name data)
-                                         (:last-name data)
-                                         (:uname data)
-                                         (:email data)
-                                         (:phone data)
-                                         (:type data)
-                                         (:position data)
-                                         (:department data)
-                                         (:active data)))))
+    ;(js/console.log "sdfdsf")
+    (ds/transact!
+      (insert-employee (:name data)
+        (:last-name data)
+        (:uname data)
+        (:email data)
+        (:phone data)
+        (:type data)
+        (:position data)
+        (:department data)
+        (:active data)))))
 
 (defmethod forms-core/on-submit-success Form [this app-db form-props data]
   (pipeline! [value app-db]

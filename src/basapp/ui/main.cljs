@@ -5,7 +5,7 @@
 
 (defn render [ctx]
   (let [page (:page (route> ctx))]
-    [ant/layout {:style {:background "#f0f2f5"}}
+    [ant/layout {:style {:padding-bottom "1em"}}
      [ant/layout-header {:class "banner"}
       [:a {:href (ui/url ctx {:page "dashboard"})} [:h2.banner-header "BAS poslovni sistem"]]]
      (case page
