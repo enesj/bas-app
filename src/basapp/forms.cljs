@@ -11,5 +11,5 @@
 
 (def forms-automount-fns
   {:employee (fn [r] (when (= "employee" (:page r)) :form))
-   :sector (fn [r] (when (and (= "sectors" (:page r)) (:id r)) :form))
-   :department (fn [r] (when (= "department" (:page r))) :form)})
+   :sector (fn [r] (when (and (= "sector" (:page r))) :form))
+   :department (fn [r] (when (= "department" (:page r)) :form))})

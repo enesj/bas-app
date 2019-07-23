@@ -6,7 +6,9 @@
 (def controller
   (pp-controller/constructor
     (constantly true)
-    {:employees-filter (pipeline! [value app-db]
-                                  (pp/commit! (assoc-in app-db [:kv :employees-filter] value)))}))
+    {:on-route-changed (pipeline! [value app-db]
+                                  (pp/commit! (assoc-in app-db [:kv :filter] [])))
+     :filter (pipeline! [value app-db]
+                        (pp/commit! (assoc-in app-db [:kv :filter] value)))}))
 
 

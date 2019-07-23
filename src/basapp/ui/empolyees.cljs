@@ -1,6 +1,6 @@
 (ns basapp.ui.empolyees
   (:require [keechma.ui-component :as ui]
-            [keechma.toolbox.ui :refer [<cmd route>]]
+            [keechma.toolbox.ui :refer [<cmd route> sub>]]
             [basapp.datascript :refer [q>]]
             [antizer.reagent :as ant]
             [reagent.core :as r]))
@@ -30,30 +30,52 @@
                  :show-total #(str "Ukupno: " % " korisnika")})
 
 
-(defn employees-table [ctx data]
+(defn employees-table [ctx data filter]
   (let [employees
-        (q> ctx
-            '[:find [(pull ?e [* :db/id]) ...]
-              :in $
-              :where [?e :employee/uname]])
-        filter (get-in @(:app-db ctx) [:kv :emplooyees-filter])]
-    (fn []
+        (if filter
+          (q> ctx
+              '[:find [(pull ?e [* :db/id]) ...]
+                :in $ [?a [?b ...]]
+                :where [?e :employee/uname]
+                [?e ?a ?b]]
+              filter)
+          (q> ctx
+              '[:find [(pull ?e [* :db/id]) ...]
+                :where [?e :employee/uname]]))]
       [:div
-       [:h2  {:on-click #(js/console.log  "dfsd" (get-in @(:app-db ctx) [:kv :employees-filter]))} "Korisnici"]
+       [:h2 "Korisnici"]
        [ant/table
         {:columns (columns ctx data)
-         :dataSource employees :pagination pagination :row-key "id"}]])))
+         :dataSource employees :pagination pagination :row-key "id"}]]))
 
 
 (defn render [ctx]
-  (let [department-id (:id (route> ctx))
-        data {:departments (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :department/short-name]])
-              :id      department-id}]
-    [:div.container.pt-5
-     [:p.mb-5 [:a {:href (ui/url ctx {:page "dashboard"})} "← Povratak na naslovnicu"]]
-     [employees-table ctx data]]))
+  (let [filter-sub (sub> ctx :filter)
+        filter-sub' (when (not-empty filter-sub) [(keyword "employee" (first filter-sub)) (second filter-sub)])
+        route (route> ctx)
+        page (:page route)
+        departments (case page
+                      "sector" (q> ctx '[:find ( ?e ...)
+                                         :in $ [?s ...]
+                                         :where  [?e :department/short-name]
+                                         [?e :department/sector ?s]]
+                                   [(:id route)])
+                      "department" [(:id route)]
+                                   nil)
+
+        filter (if (#{"sector" "department"} page) [:employee/department departments] filter-sub')
+        data {:departments (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :department/short-name]])}]
+    ;(js/console.log "FILTER " filter)
+    [:div
+     (when (= "employees" page)
+       [ant/row
+        [ant/col {:span 8 :offset 1 :style {:padding-top "1em"}}
+         [:a {:href (ui/url ctx {:page "dashboard"})} "← Povratak na naslovnicu"]]])
+     [ant/row
+      [ant/col {:span 12 :offset 4 :style {:padding-top "1em"}}
+       [employees-table ctx data filter]]]]))
 
 
 (def component
   (ui/constructor {:renderer render
-                   :subscription-deps [:datascript]}))
+                   :subscription-deps [:datascript :filter]}))

@@ -30,4 +30,4 @@
                  ;   (d/insert-country (d/db app-db) "Guatemala" "GTM" "Q"))
                  (pp/commit! (assoc-in app-db [:kv :datascript-initialized?] true))
                  (rescue! [e]
-          (println "ERROR->" e)))}))
+                   (println "ERROR->" e)))}))
