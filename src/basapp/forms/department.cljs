@@ -5,7 +5,7 @@
             [basapp.forms.validators :as v]
             [datascript.core :as d]
             [basapp.datascript :as ds]
-            [basapp.domain.bas :refer [insert-department]]))
+            [basapp.domain.seed :refer [insert-department]]))
 ;[basapp.util :refer [pretty-print]]))
 
 

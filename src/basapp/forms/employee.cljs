@@ -5,7 +5,7 @@
             [basapp.forms.validators :as v]
             [datascript.core :as d]
             [basapp.datascript :as ds]
-            [basapp.domain.bas :refer [insert-employee]]))
+            [basapp.domain.seed :refer [insert-employee]]))
 
 
 (defn get-init-data [db employee-id]
@@ -18,17 +18,15 @@
     :type (:employee/type data)
     :position (:employee/position data)
     :department (:db/id (:employee/department data))
+    :office (:db/id (:employee/office data))
     :active (:employee/active data)}))
-
-
-
 
 (defrecord Form [validator])
 
 (defmethod forms-core/get-data Form [_ app-db form-props]
   (pipeline! [value app-db]
              (t/block-until! [form-props :get-data] #(get-in % [:kv :datascript-initialized?]))
-             ;(js/console.log "init" (get-init-data (:datascript app-db) (get-in app-db [:route :data :id])))
+             ;(js/console.log "init-emplyee" (get-init-data (:datascript app-db) (get-in app-db [:route :data :id])))
              (get-init-data (:datascript app-db) (get-in app-db [:route :data :id]))))
 
 (defmethod forms-core/submit-data Form [_ app-db _ data]
@@ -43,6 +41,7 @@
         (:type data)
         (:position data)
         (:department data)
+        (:office data)
         (:active data)))))
 
 (defmethod forms-core/on-submit-success Form [this app-db form-props data]

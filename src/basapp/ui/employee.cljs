@@ -23,6 +23,10 @@
       [i/text ctx form-props :phone {:placeholder "Telefon"}]
       [i/text ctx form-props :type {:placeholder "Kategorija"}]
       [i/text ctx form-props :position {:placeholder "Pozicija"}]
+      [i/select ctx form-props :office
+       {:options (mapv (fn [r]
+                         {:value (:db/id r) :label (:office/name r)}) (:offices data))
+        :label "Prostorija"}]
       [i/checkbox ctx form-props :active {:label "Aktivan"}]
       [:button.btn.btn-primary "Snimi"]
       [:button.btn.btn-secondary {:style {:margin-left "0.5em"}
@@ -38,6 +42,8 @@
                    :default nil)
         data {:employees (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :employee/uname]])
               :departments (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :department/short-name]])
+              :offices (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :office/short-name]])
+              :floors (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :floor/short-name]])
               :id      employee-id}]
     (if (:employee/name employee)
       [:div

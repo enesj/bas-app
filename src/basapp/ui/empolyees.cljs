@@ -2,24 +2,27 @@
   (:require [keechma.ui-component :as ui]
             [keechma.toolbox.ui :refer [<cmd route> sub>]]
             [basapp.datascript :refer [q>]]
+            [basapp.util :as util]
             [antizer.reagent :as ant]
             [reagent.core :as r]))
 
 
 
 (defn comparison [data1 data2 field]
-  (compare (get (js->clj data1 :keywordize-keys true) field)
-           (get (js->clj data2 :keywordize-keys true) field)))
+  (util/comparison data1 data2 field))
 
 
 (defn columns [ctx data]
+
   [{:title "Ime" :dataIndex "name" :sorter #(comparison %1 %2 :name)
-    :render #(r/as-element [:a {:href (ui/url ctx {:page "employee" :id ((js->clj %2) "id")})} %1])}
+    :render #(r/as-element [:a {:href (ui/url ctx {:page "employee" :id (util/get-id %2)})} %1])}
    {:title "Prezime" :dataIndex "last-name" :sorter #(comparison %1 %2 :last-name)}
    {:title "Korisničko ime" :dataIndex "uname" :sorter #(comparison %1 %2 :uname)}
    {:title "E-mail" :dataIndex "email" :sorter #(comparison %1 %2 :email)}
    {:title "Odjeljenje" :dataIndex "department" :sorter #(comparison %1 %2 :department)
-    :render #(r/as-element (:department/short-name (first (filter (fn [x] (= (:db/id x) ((js->clj %1) "id"))) (:departments data)))))}
+    :render #(r/as-element
+               [:a {:href (ui/url ctx {:page "department" :id (util/get-id %1)})}
+                (:department/short-name (first (filter (fn [x] (= (:db/id x) (util/get-id %1))) (:departments data))))])}
    {:title "Aktivan" :dataIndex "active" :sorter #(comparison %1 %2 :active)
     :filters [{:text "Da"  :value true }, { :text "Ne" :value false }],
     :onFilter (fn [value, record] (= (str (.-active record))  value))
@@ -46,7 +49,12 @@
        [:h2 "Korisnici"]
        [ant/table
         {:columns (columns ctx data)
-         :dataSource employees :pagination pagination :row-key "id"}]]))
+         :dataSource employees :pagination pagination :row-key "id"
+         :row-selection
+         {:on-change
+          #(let [selected (js->clj %2 :keywordize-keys true)]
+             (<cmd ctx [:user-actions :filter] ["employee" (mapv :id selected)]
+               (ant/message-info (str "Izabrali ste: " (map :name selected)))))}}]]))
 
 
 (defn render [ctx]

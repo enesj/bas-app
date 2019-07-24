@@ -12,7 +12,8 @@
    :employee/phone          {:db/cardinality :db.cardinality/one}
    :employee/department     {:db/cardinality :db.cardinality/one
                              :db/valueType   :db.type/ref}
-   :employee/office         {:db/cardinality :db.cardinality/one}
+   :employee/office         {:db/cardinality :db.cardinality/one
+                             :db/valueType   :db.type/ref}
    :employee/assets         {:db/cardinality :db.cardinality/many
                              :db/valueType   :db.type/ref}
    :employee/aaccess-rights {:db/cardinality :db.cardinality/many
@@ -23,10 +24,11 @@
    :employee/position       {:db/cardinality :db.cardinality/one}
    :employee/active         {:db/cardinality :db.cardinality/one}
 
-
-   :office/number           {:db/cardinality :db.cardinality/one
+   :office/name             {:db/cardinality :db.cardinality/one}
+   :office/short-name       {:db/cardinality :db.cardinality/one
                              :db/unique      :db.unique/identity}
-   :office/floor            {:db/cardinality :db.cardinality/one}
+   :office/floor            {:db/cardinality :db.cardinality/one
+                             :db/valueType   :db.type/ref}
 
    :floor/name              {:db/cardinality :db.cardinality/one
                              :db/unique      :db.unique/identity}
@@ -57,15 +59,15 @@
 
    :department/name         {:db/cardinality :db.cardinality/one}
 
-   :department/short-name    {:db/cardinality :db.cardinality/one
-                              :db/unique      :db.unique/identity}
+   :department/short-name   {:db/cardinality :db.cardinality/one
+                             :db/unique      :db.unique/identity}
 
    :department/sector       {:db/cardinality :db.cardinality/one
                              :db/valueType   :db.type/ref}
 
    :sector/name             {:db/cardinality :db.cardinality/one}
 
-   :sector/short-name        {:db/cardinality :db.cardinality/one
-                              :db/unique      :db.unique/identity}})
+   :sector/short-name       {:db/cardinality :db.cardinality/one
+                             :db/unique      :db.unique/identity}})
 
 

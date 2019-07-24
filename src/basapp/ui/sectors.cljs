@@ -3,6 +3,7 @@
             [keechma.toolbox.ui :refer [route> <cmd sub>]]
             [basapp.datascript :refer [q> entity>]]
             [basapp.ui.inputs :as i]
+            [basapp.util :as util]
             [keechma.toolbox.forms.ui :as forms-ui]
             [antizer.reagent :as ant]
             [reagent.core :as r]
@@ -12,13 +13,12 @@
 
 
 (defn comparison [data1 data2 field]
-  (compare (get (js->clj data1 :keywordize-keys true) field)
-           (get (js->clj data2 :keywordize-keys true) field)))
+  (util/comparison data1 data2 field))
 
 
 (defn columns [ctx]
   [{:title "Ime" :dataIndex "name" :sorter #(comparison %1 %2 :name)
-    :render #(r/as-element [:a {:href (ui/url ctx {:page "sector" :id ((js->clj %2) "id")})} %1])}
+    :render #(r/as-element [:a {:href (ui/url ctx {:page "sector" :id (util/get-id %2)})} %1])}
    {:title "Oznaka" :dataIndex "short-name" :sorter #(comparison %1 %2 :short-name)}
    {:title "Aktivan" :dataIndex "active" :sorter #(comparison %1 %2 :active)
     :filters [{:text "Da"  :value true }, { :text "Ne" :value false }],
@@ -50,11 +50,7 @@
 
 (defn render [ctx]
   (let [selection (sub> ctx :filter)
-        sector-id (:id (route> ctx))
-        sector (cond
-                 (= sector-id 0) {:sector/name "Novi" :sector/short-name "sektor"}
-                 (> sector-id 0) (entity> ctx sector-id)
-                 :default nil)]
+        sector-id (:id (route> ctx))]
     [:div
      [ant/row
       [ant/col {:span 8 :offset 1 :style {:padding-top "1em"}}
