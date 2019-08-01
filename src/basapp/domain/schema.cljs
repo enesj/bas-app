@@ -33,6 +33,19 @@
    :floor/name              {:db/cardinality :db.cardinality/one
                              :db/unique      :db.unique/identity}
 
+   :folder/link             {:db/cardinality :db.cardinality/one
+                             :db/unique      :db.unique/identity}
+
+   :folder/description      {:db/cardinality :db.cardinality/one}
+
+   :folder/responsible1     {:db/cardinality :db.cardinality/one
+                             :db/valueType   :db.type/ref}
+
+   :folder/responsible2     {:db/cardinality :db.cardinality/one
+                             :db/valueType   :db.type/ref}
+
+   :folder/parent           {:db/cardinality :db.cardinality/one
+                             :db/valueType   :db.type/ref}
 
    :asset/sku               {:db/cardinality :db.cardinality/one
                              :db/unique      :db.unique/identity}

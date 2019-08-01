@@ -12,7 +12,16 @@
       [:a.row {:href (ui/url ctx {:page "sectors"})} "Sektori"]]]
     [ant/row
      [ant/col {:span 8 :offset 2}
-      [:a.row {:href (ui/url ctx {:page "departments"})} "Odjeljenja"]]]])
+      [:a.row {:href (ui/url ctx {:page "departments"})} "Odjeljenja"]]]
+    [ant/row
+     [ant/col {:span 8 :offset 2}
+      [:a.row {:href (ui/url ctx {:page "floors"})} "Spratovi"]]]
+    [ant/row
+     [ant/col {:span 8 :offset 2}
+      [:a.row {:href (ui/url ctx {:page "offices"})} "Prostorije"]]]
+    [ant/row
+     [ant/col {:span 8 :offset 2}
+      [:a.row {:href (ui/url ctx {:page "folders"})} "Folderi"]]]])
 
 
 (defn render [ctx]

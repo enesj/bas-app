@@ -33,7 +33,9 @@
              (ds/transact!
                (insert-sector (:name data)
                               (:short-name data)
-                              (:active data)))))
+                              (:active data)
+                              nil))))
+
 
 (defmethod forms-core/on-submit-success Form [this app-db form-props data]
   (pipeline! [value app-db]

@@ -4,8 +4,7 @@
     [basapp.datascript :refer [q> entity>]]
     [basapp.ui.inputs :as i]
     [antizer.reagent :as ant]
-    [keechma.toolbox.forms.ui :as forms-ui]
-    [reagent.core :as r]))
+    [keechma.toolbox.forms.ui :as forms-ui]))
 
 (defn render-form [ctx title data]
   (let [form-props [:department :form]]

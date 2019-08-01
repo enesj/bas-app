@@ -7,7 +7,9 @@
   (pp-controller/constructor
     (constantly true)
     {:on-route-changed (pipeline! [value app-db]
-                                  (pp/commit! (assoc-in app-db [:kv :filter] [])))
+                                  ;(js/console.log value)
+                                  (when-not (= (:route value) ":page/:id")
+                                    (pp/commit! (assoc-in app-db [:kv :filter] []))))
      :filter (pipeline! [value app-db]
                         (pp/commit! (assoc-in app-db [:kv :filter] value)))}))
 

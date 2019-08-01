@@ -16,9 +16,16 @@
        "sector" [(ui/component ctx :sector)]
        "departments" [(ui/component ctx :departments)]
        "department" [(ui/component ctx :department)]
+       "floors" [(ui/component ctx :floors)]
+       "floor" [(ui/component ctx :floor)]
+       "offices" [(ui/component ctx :offices)]
+       "office" [(ui/component ctx :office)]
+       "folders" [(ui/component ctx :folders)]
+       ;"folder" [(ui/component ctx :folder)]
        [:div "404"])]))
 
 (def component
   (ui/constructor
     {:renderer       render
-     :component-deps [:dashboard :employees :employee :sectors :sector :departments :department]}))
+     :component-deps [:dashboard :employees :employee :sectors :sector :departments :department :floors
+                      :floor :offices :office :folders]}))
