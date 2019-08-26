@@ -12,9 +12,10 @@
   (util/comparison data1 data2 field))
 
 
+
 (defn columns [ctx data]
   ;(js/console.log "data" data)
-  [{:title  "Ime" :dataIndex "link" :sorter #(comparison %1 %2 :link)
+  [{:title  "Ime" :dataIndex "link" :sorter #(comparison %1 %2 (or :link :parent))
     :render #(r/as-element [:a {:href (ui/url ctx {:page "folder" :id (util/get-id %2)})} %1])}
    {:title "Opis" :dataIndex "description"}
    {:title  "Odgovoran 1" :dataIndex "responsible1" :sorter #(comparison %1 %2 :odogovran1)
@@ -45,6 +46,20 @@
            (<cmd ctx [:user-actions :filter] ["folder" (mapv :id selected) (map :name selected)])
            (ant/message-info (str "Izabrali ste: " (map :name selected))))}}]]))
 
+(defn folders-tree [data]
+  (let [folders (:folders data)
+        root-folders (filter #(= (:parent folders "")))]
+    [:div
+     [:h2 "Folderi"]
+     [ant/directory-tree
+      [ant/tree-tree-node {:title "enes" :key 1}]]]))
+        ;[ant-man/tree-tree-node {:title "jakic" :key 2}]]]]))
+        ;(mapv (fn [x] [ant/tree-tree-node {:title (:link x) :key (:id x)}]) root-folders))]))
+
+
+
+
+
 (defn render [ctx]
   (let [selection (sub> ctx :filter)
         folder-id (:id (route> ctx))
@@ -57,7 +72,8 @@
        [:a {:href (ui/url ctx {:page "dashboard"})} "← Povratak na naslovnicu"]]]
      [ant/row
       [ant/col {:span 12 :offset 4 :style {:padding-top "1em"}}
-       [folders-table ctx data]]]
+       [folders-tree data]]]
+       ;[folders-table ctx data]]]
      (when (not-empty (second selection))
        [(ui/component ctx :employees)])]))
 
