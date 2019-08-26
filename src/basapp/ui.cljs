@@ -11,8 +11,8 @@
             [basapp.ui.floor :as floor]
             [basapp.ui.offices :as offices]
             [basapp.ui.office :as office]
-            [basapp.ui.folders :as folders]))
-            ;[basapp.ui.folder :as folder]))
+            [basapp.ui.folders :as folders]
+            [basapp.ui.folder :as folder]))
 
 (def ui
   {:main main/component
@@ -27,5 +27,5 @@
    :floor floor/component
    :offices offices/component
    :office office/component
-   :folders folders/component})
-   ;:folder folder/component})
+   :folders folders/component
+   :folder folder/component})

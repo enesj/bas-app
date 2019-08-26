@@ -30,8 +30,11 @@
    :office/floor            {:db/cardinality :db.cardinality/one
                              :db/valueType   :db.type/ref}
 
-   :floor/name              {:db/cardinality :db.cardinality/one
+   :floor/short-name        {:db/cardinality :db.cardinality/one
                              :db/unique      :db.unique/identity}
+   :floor/name              {:db/cardinality :db.cardinality/one}
+
+
 
    :folder/link             {:db/cardinality :db.cardinality/one
                              :db/unique      :db.unique/identity}
@@ -51,13 +54,14 @@
                              :db/unique      :db.unique/identity}
    :asset/type              {:db/cardinality :db.cardinality/one
                              :db/valueType   :db.type/ref}
-   :asset/category          {:db/cardinality :db.cardinality/many
-                             :db/valueType   :db.type/ref}
+
    :asset/description       {:db/cardinality :db.cardinality/one}
 
 
    :asset-type/name         {:db/cardinality :db.cardinality/one
                              :db/unique      :db.unique/identity}
+   :asset-type/category     {:db/cardinality :db.cardinality/many
+                             :db/valueType   :db.type/ref}
    :asset-type/description  {:db/cardinality :db.cardinality/one}
 
 

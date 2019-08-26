@@ -21,11 +21,11 @@
        "offices" [(ui/component ctx :offices)]
        "office" [(ui/component ctx :office)]
        "folders" [(ui/component ctx :folders)]
-       ;"folder" [(ui/component ctx :folder)]
+       "folder" [(ui/component ctx :folder)]
        [:div "404"])]))
 
 (def component
   (ui/constructor
     {:renderer       render
      :component-deps [:dashboard :employees :employee :sectors :sector :departments :department :floors
-                      :floor :offices :office :folders]}))
+                      :floor :offices :office  :folders :folder]}))

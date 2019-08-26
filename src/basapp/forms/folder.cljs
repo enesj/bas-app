@@ -9,6 +9,7 @@
 
 (defn get-init-data [db folder-id]
   (let [data (d/pull db '[*] folder-id)]
+    (js/console.log "folder data" data)
     {:link         (:folder/link data)
      :description  (:folder/description data)
      :responsible1 (:db/id (:folder/responsible1 data))

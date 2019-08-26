@@ -14,7 +14,8 @@
       [i/text ctx form-props :short-name {:placeholder "Oznaka" :disabled (not= (:id data) 0)}]
       [i/text ctx form-props :name {:placeholder "Ime"}]
       [i/select ctx form-props :floor
-       {:options (mapv (fn [r] {:value (:db/id r) :label (:floor/name r)}) (:floors data))
+       {:options (mapv (fn [r] {:value (:db/id r) :label (:floor/name r)})
+                       (:floors data))
         :label "Sprat"}]
       [i/checkbox ctx form-props :active {:label "Aktivan"}]
       [:button.btn.btn-primary "Snimi"]

@@ -50,6 +50,15 @@
       :folder/parent       (get-foreign-key :folder/link parent app-db)
       :folder/active       active})])
 
+(defn insert-folder-prepare [link description responsible1 responsible2 parent active app-db]
+  [(remove-nils
+     {:folder/link         link
+      :folder/description  description
+      ;:folder/responsible1 (get-foreign-key :employee/uname responsible1 app-db)
+      ;:folder/responsible2 (get-foreign-key :employee/uname responsible2 app-db)
+      ;:folder/parent       (get-foreign-key :folder/link parent app-db)
+      :folder/active       active})])
+
 
 (defn insert-employee [name last-name uname email phone category position department office active app-db]
   ;(js/console.log "emp-d" (type department))
@@ -666,13 +675,13 @@
     nil
     "Interni dokumenti"
     true]
-   ["IMS RG1"
+   ["ISM RG1"
     ""
     "miljans"
     nil
     "Interni dokumenti"
     true]
-   ["IMS RG2"
+   ["ISM RG2"
     ""
     "miljans"
     nil
