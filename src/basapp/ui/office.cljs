@@ -3,7 +3,7 @@
             [keechma.toolbox.ui :refer [route>]]
             [basapp.datascript :refer [q> entity>]]
             [basapp.ui.inputs :as i]
-            [antizer.reagent :as ant]
+            [basapp.ui.antd  :as ant]
             [keechma.toolbox.forms.ui :as forms-ui]))
 
 (defn render-form [ctx title data]

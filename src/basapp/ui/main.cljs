@@ -1,7 +1,7 @@
 (ns basapp.ui.main
   (:require [keechma.ui-component :as ui]
             [keechma.toolbox.ui :refer [sub> <cmd route>]]
-            [antizer.reagent :as ant]))
+            [basapp.ui.antd  :as ant]))
 
 (defn render [ctx]
   (let [page (:page (route> ctx))]

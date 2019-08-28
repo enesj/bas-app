@@ -3,9 +3,8 @@
             [keechma.toolbox.ui :refer [route> <cmd sub>]]
             [basapp.datascript :refer [q> entity>]]
             [basapp.util :as util]
-            [antizer.reagent :as ant]
+            [basapp.ui.antd :as ant]
             [reagent.core :as r]))
-
 
 
 (defn comparison [data1 data2 field]
@@ -20,6 +19,7 @@
                     (mapv :id selected))]
      (<cmd ctx [:user-actions :filter] ["office" offices (map :name selected)])
      (ant/message-info (str "Izabrali ste: " (map :name selected)))))
+
 
 
 (defn columns [ctx]

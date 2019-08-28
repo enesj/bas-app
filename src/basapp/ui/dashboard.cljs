@@ -1,6 +1,6 @@
 (ns basapp.ui.dashboard
   (:require [keechma.ui-component :as ui]
-            [antizer.reagent :as ant]))
+            [basapp.ui.antd  :as ant]))
 
 (defn render-dash [ctx]
    [ant/layout-content
