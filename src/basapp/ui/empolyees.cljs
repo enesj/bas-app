@@ -3,7 +3,7 @@
             [keechma.toolbox.ui :refer [<cmd route> sub>]]
             [basapp.datascript :refer [q>]]
             [basapp.util :as util]
-            [antizer.reagent :as ant]
+            [basapp.ui.antd  :as ant]
             [reagent.core :as r]
             [clojure.string :as str]))
 
