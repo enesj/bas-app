@@ -10,7 +10,6 @@
 
 (defn get-init-data [db floor-id]
   (let [data (d/pull db '[*] floor-id)]
-    (js/console.log "floor data" data)
     {:name       (:floor/name data)
      :short-name (:floor/short-name data)
      :active     (:floor/active data)}))

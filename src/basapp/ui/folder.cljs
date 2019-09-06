@@ -6,9 +6,22 @@
             [basapp.ui.antd  :as ant]
             [keechma.toolbox.forms.ui :as forms-ui]))
 
+
+
+(defn get-childs [all-folders folder]
+  (loop [childs #{folder}]
+    (let [new-childs (for [child childs]
+                       (mapv :db-id (filter #(= child (:folder/parent %)) all-folders)))]
+      (if (not-empty new-childs)
+        (recur (reduce #(into %1 %2) new-childs))
+        new-childs))))
+
+
+
+
 (defn render-form [ctx title data]
   (let [form-props [:folder :form]]
-    ;(js/console.log "folder data" data)
+    (js/console.log "get-childs" (get-childs (:folders data) (:id data)))
     [:div.card-body
      [:form {:on-submit #(do (forms-ui/<submit ctx form-props %))}
       [i/render-errors ctx form-props]
@@ -35,7 +48,7 @@
 (defn render [ctx]
   (let [folder-id (:id (route> ctx))
         folder (cond
-                     (= folder-id 0) {:folder/name "Nova" :folder/last-name "folder"}
+                     (= folder-id 0) {:folder/name "Novi" :folder/last-name "folder"}
                      (> folder-id 0) (entity> ctx folder-id)
                      :default nil)
         data {:employees (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :employee/email]])
