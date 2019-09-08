@@ -1,3 +1,16 @@
+(def foreign-libs
+  '[{:file           "dist/index.js"
+     ;:file-min       "dist/indexjs"
+     :provides       ["react"
+                      "react-dom"
+                      "create-react-class"
+                      "antd"]
+
+     :global-exports {react               React
+                      react-dom           ReactDOM
+                      create-react-class  CreateReactClass
+                      antd Antd}}])
+
 (defproject basapp "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
@@ -12,8 +25,8 @@
                  [reagent-utils "0.3.2"]
                  [datascript "0.18.4"]
                  [cljsjs/moment "2.24.0-0"]
-                 [binaryage/oops "0.6.2"]
-                 [antizer "0.3.1"]]
+                 [binaryage/oops "0.6.2"]]
+                 ;[antizer "0.3.1"]]
 
   :min-lein-version "2.5.3"
 
@@ -51,13 +64,17 @@
                     :output-to            "resources/public/js/app.js"
                     :output-dir           "resources/public/js/dev"
                     :asset-path           "js/dev"
+                    :infer-externs        true
+                    :npm-deps             false
                     :source-map-timestamp true
                     :preloads             [devtools.preload dirac.runtime.preload]
                     :external-config
                                           {:devtools/config
                                            {:features-to-install    [:formatters :hints]
                                             :fn-symbol              "F"
-                                            :print-config-overrides true}}}}
+                                            :print-config-overrides true}}
+                    :foreign-libs ~foreign-libs}}
+
 
     {:id           "min"
      :source-paths ["src"]
@@ -67,11 +84,17 @@
                     :output-dir      "resources/public/js/min"
                     :elide-asserts   true
                     :closure-defines {goog.DEBUG false}
-                    :pretty-print    false}}
+                    :pretty-print    false
+                    :infer-externs        true
+                    :npm-deps             false
+                    :foreign-libs ~foreign-libs}}
 
     {:id           "test"
      :source-paths ["src" "test/cljs"]
      :compiler     {:output-to     "resources/public/js/test.js"
                     :output-dir    "resources/public/js/test"
                     :main          basapp.runner
-                    :optimizations :none}}]})
+                    :infer-externs        true
+                    :npm-deps             false
+                    :optimizations :none
+                    :foreign-libs ~foreign-libs}}]})

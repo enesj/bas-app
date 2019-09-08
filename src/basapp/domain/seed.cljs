@@ -47,17 +47,12 @@
       :folder/description  description
       :folder/responsible1 (get-foreign-key :employee/uname responsible1 app-db)
       :folder/responsible2 (get-foreign-key :employee/uname responsible2 app-db)
-      :folder/parent       (get-foreign-key :folder/link parent app-db)
       :folder/active       active})])
 
-(defn insert-folder-prepare [link description responsible1 responsible2 parent active app-db]
+(defn insert-folder-parent [link description responsible1 responsible2 parent active app-db]
   [(remove-nils
      {:folder/link         link
-      :folder/description  description
-      ;:folder/responsible1 (get-foreign-key :employee/uname responsible1 app-db)
-      ;:folder/responsible2 (get-foreign-key :employee/uname responsible2 app-db)
-      ;:folder/parent       (get-foreign-key :folder/link parent app-db)
-      :folder/active       active})])
+      :folder/parent       (get-foreign-key :folder/link parent app-db)})])
 
 
 (defn insert-employee [name last-name uname email phone category position department office active app-db]
@@ -74,8 +69,8 @@
     :employee/active     active}])
 
 (defn insert-data [fn data app-db]
-  (->> (for [unit data]
-         (apply fn (into unit [(:datascript app-db)])))
+  (->> (doall (for [unit data]
+                (apply fn (into unit [(:datascript app-db)]))))
        flatten))
 
 (def sectors
@@ -705,12 +700,6 @@
     nil
     "Interni dokumenti"
     true]
-   ["Pravilnici"
-    ""
-    "nenadb"
-    nil
-    "Interni dokumenti"
-    true]
    ["Registar Odluka"
     ""
     "nenadb"
@@ -747,12 +736,13 @@
     nil
     "Sektor 02"
     true]
-   ["Izvjestaji"
+   ["Izvjestaji-03"
     ""
     "tihomira"
     nil
     "Sektor 03"
     true]])
+
 
 
 

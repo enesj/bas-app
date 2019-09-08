@@ -38,7 +38,6 @@
           (q> ctx
               '[:find [(pull ?e [* :db/id]) ...]
                 :where [?e :employee/uname]]))]
-    (js/console.log "korisnici" filter)
     [:div
      (when-not filter [:h2 "Korisnici"])
      [ant/table
@@ -63,7 +62,6 @@
             id [(keyword "employee" page) [id]]
             :else nil))
         data {:departments (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :department/short-name]])}]
-    (js/console.log [(keyword "employee" field) choices] [(keyword "employee" page) [id]])
     [:div
      (if (= "employees" page)
        [ant/row
