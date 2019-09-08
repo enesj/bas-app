@@ -56,7 +56,6 @@
 
 
 (defn insert-employee [name last-name uname email phone category position department office active app-db]
-  ;(js/console.log "emp-d" (type department))
   [{:employee/name       name
     :employee/last-name  last-name
     :employee/uname      uname
@@ -65,7 +64,7 @@
     :employee/type       category
     :employee/position   position
     :employee/department (get-foreign-key :department/short-name department app-db)
-    :employee/office     office
+    :employee/office     (or (get-foreign-key :office/short-name office app-db) "")
     :employee/active     active}])
 
 (defn insert-data [fn data app-db]
@@ -217,7 +216,7 @@
     "Rukovodeći"
     "Direktor"
     "01-1"
-    24
+    "209"
     true]
    ["Borislav"       ;35
     "Kraljević"
@@ -227,7 +226,7 @@
     "Rukovodeći"
     "Zamjenik direktora"
     "01-1"
-    26
+    "210-b"
     true]
    ["Enes"       ;36
     "Jakić"
@@ -237,7 +236,7 @@
     "Rukovodeći"
     "Pomoćnik Sektor 04"
     "04-1"
-    20
+    "201"
     true]
    ["Nenad"       ;37
     "Bogdanović"
@@ -247,7 +246,7 @@
     "Rukovodeći"
     "Pomoćnik Sektor 02"
     "02-1"
-    28
+    "213"
     true]
    ["Goran"       ;38
     "Tešanović"
@@ -257,7 +256,7 @@
     "Rukovodeći"
     "Pomoćnik Sektor 03-3"
     "OU-01"
-    21
+    "206"
     true]
    ["Dragan"       ;39
     "Lučić"
@@ -267,7 +266,7 @@
     "Rukovodeći"
     "Šef Odjeljenje 04-2"
     "04-2"
-    16
+    "109"
     true]
    ["Dejana"       ;40
     "Bogdanović"
@@ -277,7 +276,7 @@
     "Rukovodeći"
     "Šef Odjeljenje 04-1"
     "04-1"
-    19
+    "202"
     true]
    ["Zvjezdan"       ;41
     "Šehovac"
@@ -287,7 +286,7 @@
     "Rukovodeći"
     "Šef Odjeljenje 03-2"
     "03-2"
-    22
+    "203"
     true]
    ["Tihomir"       ;42
     "Anđelić"
@@ -297,7 +296,7 @@
     "Rukovodeći"
     "Šef Odjeljenje 03-1"
     "03-1"
-    23
+    "204"
     true]
    ["Miljan"       ;43
     "Savić"
@@ -307,7 +306,7 @@
     "Rukovodeći"
     "Šef Odjeljenje OU"
     "OU-01"
-    21
+    "206"
     true]
    ["Brankica"       ;44
     "Šarović"
@@ -317,7 +316,7 @@
     "Službenik"
     "Viši stručni saradnik"
     "04-2"
-    16
+    "109"
     true]
    ["Nirmala"       ;45
     "Ajanović"
@@ -327,7 +326,7 @@
     "Službenik"
     "Viši stručni saradnik"
     "04-1"
-    19
+    "202"
     true]
    ["Sanja"       ;46
     "Dubovina"
@@ -337,7 +336,7 @@
     "Službenik"
     "Viši stručni saradnik"
     "04-1"
-    19
+    "202"
     true]
    ["Biljana"       ;47
     "Maletić"
@@ -347,7 +346,7 @@
     "Službenik"
     "Viši stručni saradnik"
     "01-1"
-    25
+    "210-a"
     true]
    ["Biljana"       ;48
     "Baljaj"
@@ -357,7 +356,7 @@
     "Službenik"
     "Viši stručni saradnik"
     "03-1"
-    18
+    "205"
     true]
    ["Bojana"       ;49
     "Zecevic"
@@ -367,7 +366,7 @@
     "Službenik"
     "Viši stručni saradnik"
     "03-1"
-    18
+    "205"
     true]
    ["Mario"       ;50
     "Prka"
@@ -377,7 +376,7 @@
     "Službenik"
     "Viši stručni saradnik"
     "03-1"
-    18
+    "205"
     true]
    ["Tatjana"       ;51
     "Vidović"
@@ -387,7 +386,7 @@
     "Službenik"
     "Viši stručni saradnik"
     "03-1"
-    18
+    "205"
     true]
    ["Hafiza"       ;52
     "Zametica"
@@ -397,7 +396,7 @@
     "Službenik"
     "Viši stručni saradnik"
     "03-1"
-    23
+    "204"
     true]
    ["Stana"       ;53
     "Buha"
@@ -407,7 +406,7 @@
     "Službenik"
     "Viši stručni saradnik"
     "03-1"
-    23
+    "204"
     true]
    ["Jasmina"       ;54
     "Ljubuncic"
@@ -417,7 +416,7 @@
     "Službenik"
     "Stručni savjetnik"
     "03-1"
-    23
+    "204"
     true]
    ["Goran"       ;55
     "Mrakaja"
@@ -427,7 +426,7 @@
     "Službenik"
     "Viši stručni saradnik"
     "OU-01"
-    21
+    "206"
     true]
    ["Irfan"       ;56
     "Mutap"
@@ -437,7 +436,7 @@
     "Službenik"
     "Stručni saradnik"
     "02-1"
-    28
+    "213"
     true]
    ["Miljan"       ;57
     "Vasković"
@@ -447,7 +446,7 @@
     "Službenik"
     "Stručni saradnik"
     "03-2"
-    22
+    "203"
     true]
    ["Željka"       ;58
     "Popić"
@@ -457,7 +456,7 @@
     "Službenik"
     "Viši stručni saradnik"
     "03-2"
-    22
+    "203"
     true]
    ["Verica"       ;59
     "Ristić"
@@ -467,7 +466,7 @@
     "Službenik"
     "Viši stručni saradnik"
     "02-2"
-    27
+    "212"
     true]
    ["Jelena"       ;60
     "Erbez"
@@ -477,7 +476,7 @@
     "Zaposlenik"
     "Refernt"
     "02-2"
-    27
+    "212"
     true]
    ["Ljeposava"       ;61
     "Bratić"
@@ -487,7 +486,7 @@
     "Službenik"
     "Viši stručni saradnik"
     "02-2"
-    27
+    "212"
     true]
    ["Neir"       ;62
     "Kilalić"
@@ -497,7 +496,7 @@
     "Zaposlenik"
     "Refernt"
     "04-1"
-    20
+    "201"
     true]
    ["Srđan"       ;63
     "Mršić"
@@ -507,7 +506,7 @@
     "Zaposlenik"
     "Refernt"
     "04-1"
-    20
+    "201"
     true]
    ["Sanja"       ;64
     "Ćirić"
@@ -517,7 +516,7 @@
     "Zaposlenik"
     "Refernt"
     "04-1"
-    17
+    "106"
     true]
    ["Mirsada"       ;65
     "Sijamić"
@@ -527,7 +526,7 @@
     "Zaposlenik"
     "Refernt"
     "03-1"
-    17
+    "106"
     true]
    ["Emira"       ;66
     "Hodzić"
@@ -537,7 +536,7 @@
     "Zaposlenik"
     "Refernt"
     "02-1"
-    17
+    "106"
     true]
    ["Dario"       ;67
     "Paljević"
@@ -547,7 +546,7 @@
     "Zaposlenik"
     "Refernt"
     "04-1"
-    19
+    "202"
     true]
    ["Aleksandra"       ;68
     "Milidrag"
@@ -557,7 +556,7 @@
     "Zaposlenik"
     "Refernt"
     "01-1"
-    25
+    "210-a"
     true]
    ["Snjezana"       ;69
     "Škorić"
@@ -567,7 +566,7 @@
     "Zaposlenik"
     "Refernt"
     "02-1"
-    29
+    "211"
     true]
 
    ["Dragan"       ;70

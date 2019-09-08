@@ -9,7 +9,7 @@
 (defn render-form [ctx title data]
   (let [form-props [:department :form]]
     [:div.card-body
-     [:form {:on-submit #(do (forms-ui/<submit ctx form-props %))}
+     [:form {:on-submit #(forms-ui/<submit ctx form-props %)}
       [i/render-errors ctx form-props]
       [i/text ctx form-props :short-name {:placeholder "Oznaka" :disabled (not= (:id data) 0)}]
       [i/text ctx form-props :name {:placeholder "Ime"}]
@@ -43,8 +43,6 @@
        [(ui/component ctx :employees)]]
       [ant/row
        [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}} [:h3 (str "Ne postoji odjeljenje "  department-id)]]])))
-
-
 
 (def component
   (ui/constructor {:renderer          render

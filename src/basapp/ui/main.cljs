@@ -8,6 +8,7 @@
     [ant/layout {:style {:padding-bottom "1em"}}
      [ant/layout-header {:class "banner"}
       [:a {:href (ui/url ctx {:page "dashboard"})} [:h2.banner-header "BAS poslovni sistem"]]]
+     ;(js/console.log "route" (route> ctx))
      (case page
        "dashboard" [(ui/component ctx :dashboard)]
        "employees" [(ui/component ctx :employees)]

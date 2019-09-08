@@ -9,7 +9,7 @@
 (defn render-form [ctx title data]
   (let [form-props [:floor :form]]
     [:div.card-body
-     [:form {:on-submit #(do (forms-ui/<submit ctx form-props %))}
+     [:form {:on-submit #(forms-ui/<submit ctx form-props %)}
       [i/render-errors ctx form-props]
       [i/text ctx form-props :short-name {:placeholder "Oznaka" :disabled (not= data 0)}]
       [i/text ctx form-props :name {:placeholder "Ime"}]
@@ -21,26 +21,23 @@
 
 (defn render [ctx]
   (let [floor-id (:id (route> ctx))
-        floor (cond
-                 (= floor-id 0) {:floor/name "Novi" :floor/last-name "sprat"}
-                 (> floor-id 0) (entity> ctx floor-id)
-                 :default nil)
-        data {:floors (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :floor/short-name]])
-              :id      floor-id}]
-    (if (:floor/name floor)
+        floor (entity> ctx floor-id)
+        title (or (:floor/name floor) "Dodaj sprat")
+        data {:floors (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :floor/short-name]])}]
+    (if (or (:floor/name floor) (not floor-id))
       [:div
        [ant/row
         [ant/col {:span 8 :offset 1 :style {:padding-top "1em"}}
-         [:a {:href (ui/url ctx {:page "floors"})} "← Povratak na spratovee"]]]
+         [:a {:href (ui/url ctx {:page "floors"})} "← Povratak na spratove"]]]
        [ant/row
         [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}}
-         [:h3 (str (:floor/name floor) " " (:floor/last-name floor))]]]
+         [:h3 title]]]
        [ant/row
         [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}}
          [render-form ctx "" data]]]
        [(ui/component ctx :employees)]]
       [ant/row
-       [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}} [:h3 (str "Ne postoji sprat "  floor-id)]]])))
+       [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}} [:h3 "Pogrešan link "]]])))
 
 (def component
   (ui/constructor {:renderer          render

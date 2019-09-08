@@ -9,7 +9,7 @@
 (defn render-form [ctx title data]
   (let [form-props [:office :form]]
     [:div.card-body
-     [:form {:on-submit #(do (forms-ui/<submit ctx form-props %))}
+     [:form {:on-submit #(forms-ui/<submit ctx form-props %)}
       [i/render-errors ctx form-props]
       [i/text ctx form-props :short-name {:placeholder "Oznaka" :disabled (not= (:id data) 0)}]
       [i/text ctx form-props :name {:placeholder "Ime"}]

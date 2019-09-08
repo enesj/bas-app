@@ -23,7 +23,7 @@
   (let [form-props [:folder :form]]
     (js/console.log "get-childs" (get-childs (:folders data) (:id data)))
     [:div.card-body
-     [:form {:on-submit #(do (forms-ui/<submit ctx form-props %))}
+     [:form {:on-submit #(forms-ui/<submit ctx form-props %)}
       [i/render-errors ctx form-props]
       [i/text ctx form-props :link {:placeholder "Link" :disabled (not= (:id data) 0)}]
       [i/text ctx form-props :description {:placeholder "Opis"}]

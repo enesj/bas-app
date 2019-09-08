@@ -20,7 +20,6 @@
 (defmethod forms-core/call Form [form app-db form-props [cmd & args]]
   (when (= :reset-form cmd)
     (pipeline! [value app-db]
-               ;(pp/send-command! [forms-core/id-key :unmount-form] [:sector :form])
                (pp/send-command! [forms-core/id-key :mount-form] [:sector :form]))))
 
 (defmethod forms-core/get-data Form [_ app-db form-props]

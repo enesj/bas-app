@@ -23,9 +23,9 @@
 
 
 (defn columns [ctx]
-  [{:title "Ime" :dataIndex "name" :sorter #(comparison %1 %2 :name)
+  [{:title  "Ime" :dataIndex "name" :sorter #(comparison %1 %2 :name)
     :render #(r/as-element [:a {:on-click (fn [x] (make-filter ctx [%2]))
-                                :href (ui/url ctx {:page "sector" :id (util/get-id %2)})} %1])}
+                                :href     (ui/url ctx {:page "sector" :id (util/get-id %2)})} %1])}
    {:title "Oznaka" :dataIndex "short-name" :sorter #(comparison %1 %2 :short-name)}
    {:title "Aktivan" :dataIndex "active" :sorter #(comparison %1 %2 :active)
     :filters [{:text "Da"  :value true }, { :text "Ne" :value false }],

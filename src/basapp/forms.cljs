@@ -17,8 +17,8 @@
 
 (def forms-automount-fns
   {:employee (fn [r] (when (= "employee" (:page r)) :form))
-   :sector (fn [r] (when (and (= "sector" (:page r))) :form))
+   :sector (fn [r] (when (= "sector" (:page r)) :form))
    :department (fn [r] (when (= "department" (:page r)) :form))
-   :floor (fn [r] (when (and (= "floor" (:page r))) :form))
-   :office (fn [r] (when (and (= "office" (:page r))) :form))
-   :folder (fn [r] (when (and (= "folder" (:page r))) :form))})
+   :floor (fn [r] (when (= "floor" (:page r)) :form))
+   :office (fn [r] (when (= "office" (:page r)) :form))
+   :folder (fn [r] (when (= "folder" (:page r)) :form))})
