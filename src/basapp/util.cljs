@@ -27,7 +27,8 @@
        [:a {:href (ui/url ctx {:page page :id (get-id %1)})}
         (display-field (first (filter (fn [x] (= (:db/id x) (get-id %1))) data)))])))
 
-
+(def row-style-8 {:span 8 :offset 4 :style {:padding-top "1em"}})
+(def row-style-12 {:span 12 :offset 4 :style {:padding-top "1em"}})
 
 
 (defn pagination [entities]

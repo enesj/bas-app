@@ -39,7 +39,7 @@
               '[:find [(pull ?e [* :db/id]) ...]
                 :where [?e :employee/uname]]))]
     [:div
-     (when-not filter [:h2 "Korisnici"])
+     (when-not filter [:h2 {:style {:margin-top "0.5em" :margin-bottom "1em"}} "Korisnici"])
      [ant/table
       {:columns    (columns ctx data)
        :dataSource employees :pagination (util/pagination " korisnika") :row-key "id"
@@ -65,13 +65,13 @@
     [:div
      (if (= "employees" page)
        [ant/row
-        [ant/col {:span 8 :offset 1 :style {:padding-top "1em"}}
+        [ant/col util/row-style-8
          [:a {:href (ui/url ctx {:page "dashboard"})} "← Povratak na naslovnicu"]]]
        [ant/row
-        [ant/col {:span 12 :offset 4 :style {:padding-top "1em"}}
+        [ant/col util/row-style-12
          [:h3 (str "Korisnici: " (str/join ", " selections))]]])
      [ant/row
-      [ant/col {:span 12 :offset 4 :style {:padding-top "1em"}}
+      [ant/col util/row-style-12
        [employees-table ctx data filter]]]]))
 
 (def component

@@ -26,7 +26,7 @@
 (defn departments-table [ctx data]
   (let [departments (:departments data)]
     [:div
-     [:h2 "Odjeljenja"]
+     [:h2 {:style {:margin-top "0.5em" :margin-bottom "1em"}}"Odjeljenja"]
      [ant/table
       {:columns (columns ctx data)
        :dataSource departments :pagination (util/pagination " odjeljenja") :row-key "id"
@@ -43,10 +43,10 @@
               :departments (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :department/short-name]])}]
     [:div
      [ant/row
-      [ant/col {:span 8 :offset 1 :style {:padding-top "1em"}}
+      [ant/col util/row-style-8
        [:a {:href (ui/url ctx {:page "dashboard"})} "← Povratak na naslovnicu"]]]
      [ant/row
-      [ant/col {:span 12 :offset 4 :style {:padding-top "1em"}}
+      [ant/col util/row-style-12
        [departments-table ctx data]]]
      (when (not-empty (second selection))
        [(ui/component ctx :employees)])]))

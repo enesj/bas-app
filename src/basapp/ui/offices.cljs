@@ -25,7 +25,7 @@
 (defn offices-table [ctx data]
   (let [offices (:offices data)]
     [:div
-     [:h2 "Prostorije"]
+     [:h2 {:style {:margin-top "0.5em" :margin-bottom "1em"}} "Prostorije"]
      [ant/table
       {:columns (columns ctx data)
        :dataSource offices :pagination (util/pagination " prostorija") :row-key "id"
@@ -43,10 +43,10 @@
     (js/console.log data)
     [:div
      [ant/row
-      [ant/col {:span 8 :offset 1 :style {:padding-top "1em"}}
+      [ant/col util/row-style-8
        [:a {:href (ui/url ctx {:page "dashboard"})} "← Povratak na naslovnicu"]]]
      [ant/row
-      [ant/col {:span 12 :offset 4 :style {:padding-top "1em"}}
+      [ant/col util/row-style-12
        [offices-table ctx data]]]
      (when (not-empty (second selection))
        [(ui/component ctx :employees)])]))

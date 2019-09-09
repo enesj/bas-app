@@ -4,6 +4,7 @@
             [basapp.datascript :refer [q> entity>]]
             [basapp.ui.inputs :as i]
             [basapp.ui.antd  :as ant]
+            [basapp.util :as util]
             [keechma.toolbox.forms.ui :as forms-ui]))
 
 (defn render-form [ctx title data]
@@ -30,17 +31,17 @@
     (if (:sector/name sector)
       [:div
        [ant/row
-        [ant/col {:span 8 :offset 1 :style {:padding-top "1em"}}
+        [ant/col util/row-style-8
          [:a {:href (ui/url ctx {:page "sectors"})} "← Povratak na sektore"]]]
        [ant/row
-        [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}}
+        [ant/col util/row-style-8
          [:h3 (str (:sector/name sector) " " (:sector/last-name sector))]]]
        [ant/row
-        [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}}
+        [ant/col util/row-style-8
          [render-form ctx "" data]]]
        [(ui/component ctx :employees)]]
       [ant/row
-       [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}} [:h3 (str "Ne postoji sektor "  sector-id)]]])))
+       [ant/col util/row-style-8 [:h3 (str "Ne postoji sektor "  sector-id)]]])))
 
 (def component
   (ui/constructor {:renderer          render

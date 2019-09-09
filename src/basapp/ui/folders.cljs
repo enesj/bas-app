@@ -36,7 +36,7 @@
 (defn folders-table [ctx data]
   (let [folders (:folders data)]
     [:div
-     [:h2 "Folderi"]
+     [:h2 {:style {:margin-top "0.5em" :margin-bottom "1em"}}"Folderi"]
      [ant/table
       {:columns (columns ctx data)
        :dataSource folders :pagination (util/pagination " folderi") :row-key "id"
@@ -57,9 +57,6 @@
 ;        ;(mapv (fn [x] [ant/tree-tree-node {:title (:link x) :key (:id x)}]) root-folders))]))
 
 
-
-
-
 (defn render [ctx]
   (let [selection (sub> ctx :filter)
         folder-id (:id (route> ctx))
@@ -68,10 +65,10 @@
     ;(js/console.log data)
     [:div
      [ant/row
-      [ant/col {:span 8 :offset 1 :style {:padding-top "1em"}}
+      [ant/col util/row-style-8
        [:a {:href (ui/url ctx {:page "dashboard"})} "← Povratak na naslovnicu"]]]
      [ant/row
-      [ant/col {:span 12 :offset 4 :style {:padding-top "1em"}}
+      [ant/col util/row-style-12
        ;[folders-tree data]]]
        [folders-table ctx data]]]
      (when (not-empty (second selection))

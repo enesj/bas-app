@@ -4,6 +4,7 @@
             [basapp.datascript :refer [q> entity>]]
             [basapp.ui.inputs :as i]
             [basapp.ui.antd  :as ant]
+            [basapp.util :as util]
             [keechma.toolbox.forms.ui :as forms-ui]))
 
 (defn render-form [ctx title data]
@@ -27,17 +28,17 @@
     (if (or (:floor/name floor) (not floor-id))
       [:div
        [ant/row
-        [ant/col {:span 8 :offset 1 :style {:padding-top "1em"}}
+        [ant/col util/row-style-8
          [:a {:href (ui/url ctx {:page "floors"})} "← Povratak na spratove"]]]
        [ant/row
-        [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}}
+        [ant/col util/row-style-8
          [:h3 title]]]
        [ant/row
-        [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}}
+        [ant/col util/row-style-8
          [render-form ctx "" data]]]
        [(ui/component ctx :employees)]]
       [ant/row
-       [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}} [:h3 "Pogrešan link "]]])))
+       [ant/col util/row-style-8 [:h3 "Pogrešan link "]]])))
 
 (def component
   (ui/constructor {:renderer          render

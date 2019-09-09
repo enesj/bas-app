@@ -27,15 +27,16 @@
     :render #(r/as-element [:a {:href (ui/url ctx {:page "floor" :id (util/get-id %2)})
                                 :on-click (fn [x] (make-filter ctx [%2]))} %1])}
    {:title "Oznaka" :dataIndex "short-name" :sorter #(comparison %1 %2 :short-name)}
-   {:title "Aktivan" :dataIndex "active" :sorter #(comparison %1 %2 :active)
-    :filters [{:text "Da"  :value true }, { :text "Ne" :value false }],
-    :onFilter (fn [value, record] (= (str (.-active record))  value))
-    :render #(r/as-element [:div (if  %1 "Da" "Ne")])}])
+   {:title "" 
+    :render #(r/as-element
+               [ant/popconfirm {:title "Jeste li sigurni?"
+                                :on-confirm (fn [] (js/console.log "brisi"))}
+                [ant/button {:icon "delete" :type "danger"}]])}])
 
 (defn floors-table [ctx]
   (let [floors (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :floor/short-name]])]
     [:div
-     [:h2 "Spratovi"]
+     [:h2 {:style {:margin-top "0.5em" :margin-bottom "1em"}} "Spratovi"]
      [ant/table
       {:columns    (columns ctx)
        :dataSource floors :pagination (util/pagination " spratova") :row-key "id"
@@ -46,10 +47,10 @@
     ;(js/console.log selection)
     [:div
      [ant/row
-      [ant/col {:span 8 :offset 1 :style {:padding-top "1em"}}
+      [ant/col util/row-style-8
        [:a {:href (ui/url ctx {:page "dashboard"})} "← Povratak na naslovnicu"]]]
      [ant/row
-      [ant/col {:span 12 :offset 4 :style {:padding-top "1em"}}
+      [ant/col util/row-style-12
        [floors-table ctx]]]
      (when (not-empty (second selection))
        [(ui/component ctx :employees)])]))

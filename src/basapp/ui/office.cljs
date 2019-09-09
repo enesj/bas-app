@@ -4,6 +4,7 @@
             [basapp.datascript :refer [q> entity>]]
             [basapp.ui.inputs :as i]
             [basapp.ui.antd  :as ant]
+            [basapp.util :as util]
             [keechma.toolbox.forms.ui :as forms-ui]))
 
 (defn render-form [ctx title data]
@@ -35,15 +36,15 @@
     (if (:office/name office)
       [:div
        [ant/row
-        [ant/col {:span 8 :offset 1 :style {:padding-top "1em"}} [:a {:href (ui/url ctx {:page "offices"})} "← Povratak na prostorije"]]]
+        [ant/col util/row-style-8 [:a {:href (ui/url ctx {:page "offices"})} "← Povratak na prostorije"]]]
        [ant/row
-        [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}} [:h3 (str (:office/name office) " " (:office/last-name office))]]]
+        [ant/col util/row-style-8 [:h3 (str (:office/name office) " " (:office/last-name office))]]]
        [ant/row
-        [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}}
+        [ant/col util/row-style-8
          [render-form ctx "" data]]]
        [(ui/component ctx :employees)]]
       [ant/row
-       [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}} [:h3 (str "Ne postoji prostorija "  office-id)]]])))
+       [ant/col util/row-style-8 [:h3 (str "Ne postoji prostorija "  office-id)]]])))
 
 
 

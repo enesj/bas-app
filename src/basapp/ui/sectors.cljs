@@ -35,7 +35,7 @@
 (defn sectors-table [ctx]
   (let [sectors (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :sector/short-name]])]
       [:div
-       [:h2 "Sektori"]
+       [:h2 {:style {:margin-top "0.5em" :margin-bottom "1em"}} "Sektori"]
        [ant/table
         {:columns (columns ctx)
          :dataSource sectors :pagination (util/pagination " sektora") :row-key "id"
@@ -46,10 +46,10 @@
   (let [selection (sub> ctx :filter)]
     [:div
      [ant/row
-      [ant/col {:span 8 :offset 1 :style {:padding-top "1em"}}
+      [ant/col util/row-style-8
        [:a {:href (ui/url ctx {:page "dashboard"})} "← Povratak na naslovnicu"]]]
      [ant/row
-      [ant/col {:span 12 :offset 4 :style {:padding-top "1em"}}
+      [ant/col util/row-style-12
        [sectors-table ctx]]]
      (when (not-empty (second selection))
        [(ui/component ctx :employees)])]))
