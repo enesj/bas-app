@@ -2,7 +2,6 @@
 /classes
 /checkouts
 /resources
-/node_modules
 profiles.clj
 pom.xml
 pom.xml.asc
@@ -15,3 +14,9 @@ pom.xml.asc
 .hgignore
 .hg/
 
+.idea/libraries/Leiningen__vvvvalvalval_scope_capture_0_3_2.xml
+.idea/workspace.xml
+.idea/shelf/
+node_modules/
+package.json
+yarn.lock
