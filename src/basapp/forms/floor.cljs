@@ -14,32 +14,30 @@
      :short-name (:floor/short-name data)
      :active     (:floor/active data)}))
 
-
 (defrecord Form [validator])
 
 (defmethod forms-core/call Form [form app-db form-props [cmd & args]]
   (when (= :reset-form cmd)
     (pipeline! [value app-db]
-               ;(pp/send-command! [forms-core/id-key :unmount-form] [:floor :form])
-               (pp/send-command! [forms-core/id-key :mount-form] [:floor :form]))))
+      (pp/send-command! [forms-core/id-key :mount-form] [:floor :form]))))
 
 (defmethod forms-core/get-data Form [_ app-db form-props]
   (pipeline! [value app-db]
-             (t/block-until! [form-props :get-data] #(get-in % [:kv :datascript-initialized?]))
-             ;(js/console.log "init-floor" (get-init-data (:datascript app-db) (get-in app-db [:route :data :id])))
-             (get-init-data (:datascript app-db) (get-in app-db [:route :data :id]))))
+    (t/block-until! [form-props :get-data] #(get-in % [:kv :datascript-initialized?]))
+    (get-init-data (:datascript app-db) (get-in app-db [:route :data :id]))))
 
 (defmethod forms-core/submit-data Form [_ app-db _ data]
   (pipeline! [value app-db]
-             (ds/transact!
-               (insert-floor (:name data)
-                             (:short-name data)
-                             (:active data)))))
+    (ds/transact!
+      (insert-floor (:name data)
+        (:short-name data)
+        (:active data)))))
 
 (defmethod forms-core/on-submit-success Form [this app-db form-props data]
   (pipeline! [value app-db]
-             (pp/redirect! {:page "floors"})))
+    (pp/redirect! {:page "floors"})))
 
 (defn constructor []
-  (->Form (v/to-validator {:name       [:not-empty]
-                           :short-name [:not-empty]})))
+  (->Form (v/to-validator
+            {:name       [:not-empty]
+             :short-name [:not-empty]})))
