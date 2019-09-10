@@ -2,6 +2,7 @@
 /classes
 /checkouts
 /resources
+/node_modules
 profiles.clj
 pom.xml
 pom.xml.asc
