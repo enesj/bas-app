@@ -3,23 +3,15 @@
             [keechma.toolbox.ui :refer [route>]]
             [basapp.datascript :refer [q> entity>]]
             [basapp.ui.inputs :as i]
-            [keechma.toolbox.forms.ui :as forms-ui]
-            [reagent.core :as r]))
-
-
-
-(defn render-form-errors [ctx form-props]
-  (let [form-state (forms-ui/form-state> ctx form-props)]
-    (when (= :submit-failed (get-in form-state [:state :type]))
-      (let [e (ex-message (get-in form-state [:state :cause]))]
-        [:div.alert.alert-danger e]))))
+            [basapp.ui.antd  :as ant]
+            [basapp.util :as util]
+            [keechma.toolbox.forms.ui :as forms-ui]))
 
 
 (defn render-form [ctx title data]
   (let [form-props [:employee :form]]
-    [:div.card-body
      [:form {:on-submit #(forms-ui/<submit ctx form-props %)}
-      [render-form-errors ctx form-props]
+      [i/render-errors ctx form-props]
       [i/text ctx form-props :uname {:placeholder "Korisničko ime" :disabled (not= (:id data) 0)}]
       [i/text ctx form-props :name {:placeholder "Ime"}]
       [i/text ctx form-props :last-name {:placeholder "Prezime"}]
@@ -28,14 +20,18 @@
        {:options (mapv (fn [r]
                          {:value (:db/id r) :label (:department/short-name r)}) (:departments data))
         :label "Odjeljenje"}]
-      ;[i/select ctx form-props :sector
-      ; {:options (mapv (fn [r] {:value (:db/id r) :label (:sector/short-name r)}) (:sectors data))
-      ;  :label "Sektor"}]
       [i/text ctx form-props :phone {:placeholder "Telefon"}]
       [i/text ctx form-props :type {:placeholder "Kategorija"}]
       [i/text ctx form-props :position {:placeholder "Pozicija"}]
+      [i/select ctx form-props :office
+       {:options (mapv (fn [r]
+                         {:value (:db/id r) :label (:office/name r)}) (:offices data))
+        :label "Prostorija"}]
       [i/checkbox ctx form-props :active {:label "Aktivan"}]
-      [:button.btn.btn-primary "Snimi"]]]))
+      [:button.btn.btn-primary "Snimi"]
+      [:button.btn.btn-secondary {:style {:margin-left "0.5em"}
+                                  :on-click #(do (.preventDefault %)
+                                                 (ui/redirect ctx {:page "employees"}))} "Odustani"]]))
 
 
 (defn render [ctx]
@@ -45,15 +41,24 @@
                    (> employee-id 0) (entity> ctx employee-id)
                    :default nil)
         data {:employees (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :employee/uname]])
-              :departments (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :department/short-name]])
+              :departments (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :department/short-name]
+                                                                            [?e :department/active true]])
+              :offices (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :office/short-name]
+                                                                        [?e :office/active true]])
+              :floors (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :floor/short-name]
+                                                                       [?e :floor/active true]])
               :id      employee-id}]
     (if (:employee/name employee)
-      [:div.container.pt-5
-       [:p.mb-5 [:a {:href (ui/url ctx {:page "employees"})} "← Povratak na korisnike"]]
-       [:h3 (str (:employee/name employee) " " (:employee/last-name employee))]
-       [render-form ctx "" data]]
-      [:div.container.pt-5
-       [:p.mb-5  "Nije pronadjen korisnik"]])))
+      [:div
+       [ant/row
+        [ant/col util/row-style-8 [:a {:href (ui/url ctx {:page "employees"})} "← Povratak na korisnike"]]]
+       [ant/row
+        [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}} [:h3 (str (:employee/name employee) " " (:employee/last-name employee))]]]
+       [ant/row
+        [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}}
+         [render-form ctx "" data]]]]
+      [ant/row
+       [ant/col {:span 8 :offset 4 :style {:padding-top "1em"}} [:h3 (str "Ne postoji korisnik "  employee-id)]]])))
 
 (def component
   (ui/constructor {:renderer          render

@@ -139,46 +139,46 @@ return true;
 return cljs.core._EQ_.call(null,email,email_confirmation);
 }
 })], null),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"message","message",-406056002),"Value is not a number",new cljs.core.Keyword(null,"validator","validator",-1966190681),basapp.forms.validators.numeric_QMARK_], null),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"message","message",-406056002),"Password must have at least 8 characters",new cljs.core.Keyword(null,"validator","validator",-1966190681),basapp.forms.validators.ok_password_QMARK_], null),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"message","message",-406056002),"Value is not a valid phone",new cljs.core.Keyword(null,"validator","validator",-1966190681),basapp.forms.validators.phone_QMARK_], null),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"message","message",-406056002),"Not a valid Zipcode",new cljs.core.Keyword(null,"validator","validator",-1966190681),basapp.forms.validators.valid_zipcode_QMARK_], null),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"message","message",-406056002),"Passwords don't match",new cljs.core.Keyword(null,"validator","validator",-1966190681),basapp.forms.validators.password_confirmation], null),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"message","message",-406056002),"Value can't be empty",new cljs.core.Keyword(null,"validator","validator",-1966190681),basapp.forms.validators.not_empty_QMARK_], null),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"message","message",-406056002),"Must be between 0 and 100",new cljs.core.Keyword(null,"validator","validator",-1966190681),basapp.forms.validators.number0_GT_100_QMARK_], null),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"message","message",-406056002),"Date must be in the future",new cljs.core.Keyword(null,"validator","validator",-1966190681),(function (v,_,___$1){
-var current_timestamp = (function (){var target_obj_29461 = Date;
-var _STAR_runtime_state_STAR_29468 = oops.state._STAR_runtime_state_STAR_;
-oops.state._STAR_runtime_state_STAR_ = oops.state.prepare_state.call(null,target_obj_29461,(new Error()),function(){arguments[0].apply(console,Array.prototype.slice.call(arguments,1))});
+var current_timestamp = (function (){var target_obj_26321 = Date;
+var _STAR_runtime_state_STAR_26325 = oops.state._STAR_runtime_state_STAR_;
+oops.state._STAR_runtime_state_STAR_ = oops.state.prepare_state.call(null,target_obj_26321,(new Error()),function(){arguments[0].apply(console,Array.prototype.slice.call(arguments,1))});
 
-try{var call_info_29463 = [target_obj_29461,(function (){var next_obj_29464 = ((oops.core.validate_object_access_dynamically.call(null,target_obj_29461,(0),"now",true,true,false))?(target_obj_29461["now"]):null);
-return next_obj_29464;
+try{var call_info_26323 = [target_obj_26321,(function (){var next_obj_26324 = ((oops.core.validate_object_access_dynamically.call(null,target_obj_26321,(0),"now",true,true,false))?(target_obj_26321["now"]):null);
+return next_obj_26324;
 })()];
-var fn_29462 = (call_info_29463[(1)]);
-if(oops.core.validate_fn_call_dynamically.call(null,fn_29462,oops.state.get_last_access_modifier.call(null))){
-if(!((fn_29462 == null))){
-return fn_29462.call((call_info_29463[(0)]));
+var fn_26322 = (call_info_26323[(1)]);
+if(oops.core.validate_fn_call_dynamically.call(null,fn_26322,oops.state.get_last_access_modifier.call(null))){
+if(!((fn_26322 == null))){
+return fn_26322.call((call_info_26323[(0)]));
 } else {
 return null;
 }
 } else {
 return null;
 }
-}finally {oops.state._STAR_runtime_state_STAR_ = _STAR_runtime_state_STAR_29468;
+}finally {oops.state._STAR_runtime_state_STAR_ = _STAR_runtime_state_STAR_26325;
 }})();
 if(cljs.core.not.call(null,basapp.forms.validators.not_empty_QMARK_.call(null,v,null,null))){
 return true;
 } else {
-return (current_timestamp < (function (){var target_obj_29470 = v;
-var _STAR_runtime_state_STAR_29483 = oops.state._STAR_runtime_state_STAR_;
-oops.state._STAR_runtime_state_STAR_ = oops.state.prepare_state.call(null,target_obj_29470,(new Error()),function(){arguments[0].apply(console,Array.prototype.slice.call(arguments,1))});
+return (current_timestamp < (function (){var target_obj_26326 = v;
+var _STAR_runtime_state_STAR_26330 = oops.state._STAR_runtime_state_STAR_;
+oops.state._STAR_runtime_state_STAR_ = oops.state.prepare_state.call(null,target_obj_26326,(new Error()),function(){arguments[0].apply(console,Array.prototype.slice.call(arguments,1))});
 
-try{var call_info_29472 = [target_obj_29470,(function (){var next_obj_29477 = ((oops.core.validate_object_access_dynamically.call(null,target_obj_29470,(0),"format",true,true,false))?(target_obj_29470["format"]):null);
-return next_obj_29477;
+try{var call_info_26328 = [target_obj_26326,(function (){var next_obj_26329 = ((oops.core.validate_object_access_dynamically.call(null,target_obj_26326,(0),"format",true,true,false))?(target_obj_26326["format"]):null);
+return next_obj_26329;
 })()];
-var fn_29471 = (call_info_29472[(1)]);
-if(oops.core.validate_fn_call_dynamically.call(null,fn_29471,oops.state.get_last_access_modifier.call(null))){
-if(!((fn_29471 == null))){
-return fn_29471.call((call_info_29472[(0)]),"x");
+var fn_26327 = (call_info_26328[(1)]);
+if(oops.core.validate_fn_call_dynamically.call(null,fn_26327,oops.state.get_last_access_modifier.call(null))){
+if(!((fn_26327 == null))){
+return fn_26327.call((call_info_26328[(0)]),"x");
 } else {
 return null;
 }
 } else {
 return null;
 }
-}finally {oops.state._STAR_runtime_state_STAR_ = _STAR_runtime_state_STAR_29483;
+}finally {oops.state._STAR_runtime_state_STAR_ = _STAR_runtime_state_STAR_26330;
 }})());
 }
 })], null),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"message","message",-406056002),"Please select state",new cljs.core.Keyword(null,"validator","validator",-1966190681),(function (v,data,_){
@@ -196,42 +196,42 @@ var end = cljs.core.get_in.call(null,data,new cljs.core.PersistentVector(null, 1
 if(((cljs.core.not.call(null,basapp.forms.validators.not_empty_QMARK_.call(null,start,null,null))) || (cljs.core.not.call(null,basapp.forms.validators.not_empty_QMARK_.call(null,end,null,null))))){
 return true;
 } else {
-return ((function (){var target_obj_29486 = start;
-var _STAR_runtime_state_STAR_29490 = oops.state._STAR_runtime_state_STAR_;
-oops.state._STAR_runtime_state_STAR_ = oops.state.prepare_state.call(null,target_obj_29486,(new Error()),function(){arguments[0].apply(console,Array.prototype.slice.call(arguments,1))});
+return ((function (){var target_obj_26331 = start;
+var _STAR_runtime_state_STAR_26335 = oops.state._STAR_runtime_state_STAR_;
+oops.state._STAR_runtime_state_STAR_ = oops.state.prepare_state.call(null,target_obj_26331,(new Error()),function(){arguments[0].apply(console,Array.prototype.slice.call(arguments,1))});
 
-try{var call_info_29488 = [target_obj_29486,(function (){var next_obj_29489 = ((oops.core.validate_object_access_dynamically.call(null,target_obj_29486,(0),"format",true,true,false))?(target_obj_29486["format"]):null);
-return next_obj_29489;
+try{var call_info_26333 = [target_obj_26331,(function (){var next_obj_26334 = ((oops.core.validate_object_access_dynamically.call(null,target_obj_26331,(0),"format",true,true,false))?(target_obj_26331["format"]):null);
+return next_obj_26334;
 })()];
-var fn_29487 = (call_info_29488[(1)]);
-if(oops.core.validate_fn_call_dynamically.call(null,fn_29487,oops.state.get_last_access_modifier.call(null))){
-if(!((fn_29487 == null))){
-return fn_29487.call((call_info_29488[(0)]),"x");
+var fn_26332 = (call_info_26333[(1)]);
+if(oops.core.validate_fn_call_dynamically.call(null,fn_26332,oops.state.get_last_access_modifier.call(null))){
+if(!((fn_26332 == null))){
+return fn_26332.call((call_info_26333[(0)]),"x");
 } else {
 return null;
 }
 } else {
 return null;
 }
-}finally {oops.state._STAR_runtime_state_STAR_ = _STAR_runtime_state_STAR_29490;
-}})() < (function (){var target_obj_29491 = end;
-var _STAR_runtime_state_STAR_29495 = oops.state._STAR_runtime_state_STAR_;
-oops.state._STAR_runtime_state_STAR_ = oops.state.prepare_state.call(null,target_obj_29491,(new Error()),function(){arguments[0].apply(console,Array.prototype.slice.call(arguments,1))});
+}finally {oops.state._STAR_runtime_state_STAR_ = _STAR_runtime_state_STAR_26335;
+}})() < (function (){var target_obj_26336 = end;
+var _STAR_runtime_state_STAR_26340 = oops.state._STAR_runtime_state_STAR_;
+oops.state._STAR_runtime_state_STAR_ = oops.state.prepare_state.call(null,target_obj_26336,(new Error()),function(){arguments[0].apply(console,Array.prototype.slice.call(arguments,1))});
 
-try{var call_info_29493 = [target_obj_29491,(function (){var next_obj_29494 = ((oops.core.validate_object_access_dynamically.call(null,target_obj_29491,(0),"format",true,true,false))?(target_obj_29491["format"]):null);
-return next_obj_29494;
+try{var call_info_26338 = [target_obj_26336,(function (){var next_obj_26339 = ((oops.core.validate_object_access_dynamically.call(null,target_obj_26336,(0),"format",true,true,false))?(target_obj_26336["format"]):null);
+return next_obj_26339;
 })()];
-var fn_29492 = (call_info_29493[(1)]);
-if(oops.core.validate_fn_call_dynamically.call(null,fn_29492,oops.state.get_last_access_modifier.call(null))){
-if(!((fn_29492 == null))){
-return fn_29492.call((call_info_29493[(0)]),"x");
+var fn_26337 = (call_info_26338[(1)]);
+if(oops.core.validate_fn_call_dynamically.call(null,fn_26337,oops.state.get_last_access_modifier.call(null))){
+if(!((fn_26337 == null))){
+return fn_26337.call((call_info_26338[(0)]),"x");
 } else {
 return null;
 }
 } else {
 return null;
 }
-}finally {oops.state._STAR_runtime_state_STAR_ = _STAR_runtime_state_STAR_29495;
+}finally {oops.state._STAR_runtime_state_STAR_ = _STAR_runtime_state_STAR_26340;
 }})());
 }
 })], null),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"message","message",-406056002),"Not a valid US state",new cljs.core.Keyword(null,"validator","validator",-1966190681),basapp.forms.validators.valid_us_state_QMARK_], null)]);
@@ -258,4 +258,4 @@ return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMP
 }),cljs.core.PersistentArrayMap.EMPTY,config));
 });
 
-//# sourceMappingURL=validators.js.map?rel=1563552857772
+//# sourceMappingURL=validators.js.map?rel=1568104862346

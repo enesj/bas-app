@@ -1,84 +1,67 @@
 (ns basapp.ui.sectors
   (:require [keechma.ui-component :as ui]
-            [keechma.toolbox.ui :refer [route>]]
+            [keechma.toolbox.ui :refer [route> <cmd sub>]]
             [basapp.datascript :refer [q> entity>]]
-            [basapp.ui.inputs :as i]
-            [keechma.toolbox.forms.ui :as forms-ui]
-            [antizer.reagent :as ant]
-            [reagent.core :as r]
-            [keechma.toolbox.pipeline.core :as pp]
-            [keechma.toolbox.forms.core :as forms-core]))
+            [basapp.domain.seed :refer [insert-sector]]
+            [basapp.util :as util]
+            [basapp.ui.antd  :as ant]
+            [reagent.core :as r]))
 
 
 
 (defn comparison [data1 data2 field]
-  (compare (get (js->clj data1 :keywordize-keys true) field)
-           (get (js->clj data2 :keywordize-keys true) field)))
+  (util/comparison data1 data2 field))
+
+(defn make-filter [ctx id]
+  (let [selected (js->clj id :keywordize-keys true)
+        offices (q> ctx '[:find (?e ...)
+                          :in $ [?s ...]
+                          :where [?e :department/short-name]
+                          [?e :department/sector ?s]]
+                    (mapv :id selected))]
+    (<cmd ctx [:user-actions :filter] ["department" offices (map :name selected)])
+    (ant/message-info (str "Izabrali ste: " (map :name selected)))))
 
 
 (defn columns [ctx]
-  [{:title "Ime" :dataIndex "name" :sorter #(comparison %1 %2 :name)
-    :render #(r/as-element [:a {:href (ui/url ctx {:page "sectors" :id ((js->clj %2) "id")})} %1])}
+  [{:title  "Ime" :dataIndex "name" :sorter #(comparison %1 %2 :name)
+    :render #(r/as-element [:a {:on-click (fn [x] (make-filter ctx [%2]))
+                                :href     (ui/url ctx {:page "sector" :id (util/get-id %2)})} %1])}
    {:title "Oznaka" :dataIndex "short-name" :sorter #(comparison %1 %2 :short-name)}
-   {:title "Aktivan" :dataIndex "active" :sorter #(comparison %1 %2 :active)
-    :filters [{:text "Da"  :value true }, { :text "Ne" :value false }],
-    :onFilter (fn [value, record] (= (str (.-active record))  value))
-    :render #(r/as-element [:div (if  %1 "Da" "Ne")])}])
-
-(def pagination {:show-size-changer true
-                 :page-size-options ["5" "10" "20"]
-                 :show-total #(str "Ukupno: " % " sektora")})
+   {:title  ""
+    :render #(r/as-element
+               [ant/popconfirm {:title      "Jeste li sigurni?"
+                                :on-confirm (fn [] (let [data (js->clj %1 :keywordize-keys true)]
+                                                     (<cmd ctx [:user-actions :transact] (partial insert-sector
+                                                                                                    (:name data)
+                                                                                                    (:short-name data)
+                                                                                                    false))))}
+                [ant/button {:icon "delete" :type "danger"}]])}])
 
 (defn sectors-table [ctx]
-  (let [sectors
-        (q> ctx
-            '[:find [(pull ?e [* :db/id]) ...]
-              :in $
-              :where [?e :sector/short-name]])]
+  (let [sectors (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :sector/short-name]
+                                                                [?e :sector/active true]])]
       [:div
-       [:h2 "Sektori"]
+       [:h2 {:style {:margin-top "0.5em" :margin-bottom "1em"}} "Sektori"]
        [ant/table
         {:columns (columns ctx)
-         :dataSource sectors :pagination pagination :row-key "id"}]]))
-
-
-
-
-(defn render-form-errors [ctx form-props]
-  (let [form-state (forms-ui/form-state> ctx form-props)]
-    (when (= :submit-failed (get-in form-state [:state :type]))
-      (let [e (ex-message (get-in form-state [:state :cause]))]
-        [:div.alert.alert-danger e]))))
-
-
-(defn render-form [ctx title data]
-  (let [form-props [:sector :form]]
-    [:div.card-body
-     [:form {:on-submit #(do (forms-ui/<submit ctx form-props %))}
-      [render-form-errors ctx form-props]
-      [i/text ctx form-props :short-name {:placeholder "Oznaka" :disabled (not= data 0)}]
-      [i/text ctx form-props :name {:placeholder "Ime"}]
-      [i/checkbox ctx form-props :active {:label "Aktivan"}]
-      [:button.btn.btn-primary "Snimi"]]]))
-
+         :dataSource sectors :pagination (util/pagination " sektora") :row-key "id"
+         :row-selection
+         {:on-change #(make-filter ctx %2)}}]]))
 
 (defn render [ctx]
-  (let [sector-id (:id (route> ctx))
-        sector (cond
-                 (= sector-id 0) {:sector/name "Novi" :sector/short-name "sektor"}
-                 (> sector-id 0) (entity> ctx sector-id)
-                 :default nil)]
-    [:div.container.pt-5
-     [:p.mb-5 [:a {:href (ui/url ctx {:page "dashboard"})} "← Povratak na naslovnicu"]]
-     [sectors-table ctx]
-     (when (:sector/name sector)
-       (forms-ui/<call ctx [:sector :form] :reset-form)
-       [:div.container.pt-5
-        [:h3 (str (:sector/name sector) " " (:sector/short-name sector))]
-        [render-form ctx "" sector-id]])]))
-
-
+  (let [selection (sub> ctx :filter)]
+    [:div
+     [ant/row
+      [ant/col util/row-style-8
+       [:a {:href (ui/url ctx {:page "dashboard"})} "← Povratak na naslovnicu"]]]
+     [ant/row
+      [ant/col util/row-style-12
+       [sectors-table ctx]]]
+     (when (not-empty (second selection))
+       [(ui/component ctx :employees)])]))
 
 (def component
   (ui/constructor {:renderer render
-                   :subscription-deps [:datascript]}))
+                   :subscription-deps [:datascript :filter]
+                   :component-deps [:employees]}))

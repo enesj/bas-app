@@ -16,6 +16,6 @@ return reagent.ratom.make_reaction.call(null,(function (){
 return new cljs.core.Keyword(null,"datascript","datascript",-2114593819).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,app_db_atom));
 }));
 });
-basapp.subscriptions.subscriptions = new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"datascript","datascript",-2114593819),basapp.subscriptions.get_datascript], null);
+basapp.subscriptions.subscriptions = new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"filter","filter",-948537934),basapp.subscriptions.get_kv.call(null,new cljs.core.Keyword(null,"filter","filter",-948537934)),new cljs.core.Keyword(null,"datascript","datascript",-2114593819),basapp.subscriptions.get_datascript], null);
 
-//# sourceMappingURL=subscriptions.js.map?rel=1563552885777
+//# sourceMappingURL=subscriptions.js.map?rel=1568104890354

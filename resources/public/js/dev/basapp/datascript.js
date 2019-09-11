@@ -25,8 +25,8 @@ datascript.core.unlisten_BANG_.call(null,conn,new cljs.core.Keyword("basapp.data
 return config;
 });
 basapp.datascript.install = (function basapp$datascript$install(var_args){
-var G__58159 = arguments.length;
-switch (G__58159) {
+var G__40763 = arguments.length;
+switch (G__40763) {
 case 1:
 return basapp.datascript.install.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -46,10 +46,10 @@ return basapp.datascript.install.call(null,app_config,null);
 });
 
 basapp.datascript.install.cljs$core$IFn$_invoke$arity$2 = (function (app_config,schema){
-return keechma.app_state.core.reg_on_stop.call(null,keechma.app_state.core.reg_on_start.call(null,cljs.core.assoc_in.call(null,app_config,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"context","context",-830191113),new cljs.core.Keyword(null,"datascript","datascript",-2114593819)], null),datascript.core.create_conn.call(null,schema)),(function (p1__58156_SHARP_){
-return basapp.datascript.start_datascript.call(null,p1__58156_SHARP_);
-})),(function (p1__58157_SHARP_){
-return basapp.datascript.stop_datascript.call(null,p1__58157_SHARP_);
+return keechma.app_state.core.reg_on_stop.call(null,keechma.app_state.core.reg_on_start.call(null,cljs.core.assoc_in.call(null,app_config,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"context","context",-830191113),new cljs.core.Keyword(null,"datascript","datascript",-2114593819)], null),datascript.core.create_conn.call(null,schema)),(function (p1__40760_SHARP_){
+return basapp.datascript.start_datascript.call(null,p1__40760_SHARP_);
+})),(function (p1__40761_SHARP_){
+return basapp.datascript.stop_datascript.call(null,p1__40761_SHARP_);
 }));
 });
 
@@ -88,18 +88,18 @@ var this__4203__auto____$1 = this;
 return this__4203__auto____$1.cljs$core$ILookup$_lookup$arity$3(null,k__4204__auto__,null);
 });
 
-basapp.datascript.TransactSideffect.prototype.cljs$core$ILookup$_lookup$arity$3 = (function (this__4205__auto__,k58162,else__4206__auto__){
+basapp.datascript.TransactSideffect.prototype.cljs$core$ILookup$_lookup$arity$3 = (function (this__4205__auto__,k40766,else__4206__auto__){
 var self__ = this;
 var this__4205__auto____$1 = this;
-var G__58166 = k58162;
-var G__58166__$1 = (((G__58166 instanceof cljs.core.Keyword))?G__58166.fqn:null);
-switch (G__58166__$1) {
+var G__40770 = k40766;
+var G__40770__$1 = (((G__40770 instanceof cljs.core.Keyword))?G__40770.fqn:null);
+switch (G__40770__$1) {
 case "transactions":
 return self__.transactions;
 
 break;
 default:
-return cljs.core.get.call(null,self__.__extmap,k58162,else__4206__auto__);
+return cljs.core.get.call(null,self__.__extmap,k40766,else__4206__auto__);
 
 }
 });
@@ -115,10 +115,10 @@ return cljs.core.pr_sequential_writer.call(null,writer__4218__auto__,cljs.core.p
 return cljs.core.pr_sequential_writer.call(null,writer__4218__auto__,pr_pair__4220__auto__,"#basapp.datascript.TransactSideffect{",", ","}",opts__4219__auto__,cljs.core.concat.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [(new cljs.core.PersistentVector(null,2,(5),cljs.core.PersistentVector.EMPTY_NODE,[new cljs.core.Keyword(null,"transactions","transactions",-1425846118),self__.transactions],null))], null),self__.__extmap));
 });
 
-basapp.datascript.TransactSideffect.prototype.cljs$core$IIterable$_iterator$arity$1 = (function (G__58161){
+basapp.datascript.TransactSideffect.prototype.cljs$core$IIterable$_iterator$arity$1 = (function (G__40765){
 var self__ = this;
-var G__58161__$1 = this;
-return (new cljs.core.RecordIter((0),G__58161__$1,1,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"transactions","transactions",-1425846118)], null),(cljs.core.truth_(self__.__extmap)?cljs.core._iterator.call(null,self__.__extmap):cljs.core.nil_iter.call(null))));
+var G__40765__$1 = this;
+return (new cljs.core.RecordIter((0),G__40765__$1,1,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"transactions","transactions",-1425846118)], null),(cljs.core.truth_(self__.__extmap)?cljs.core._iterator.call(null,self__.__extmap):cljs.core.nil_iter.call(null))));
 });
 
 basapp.datascript.TransactSideffect.prototype.cljs$core$IMeta$_meta$arity$1 = (function (this__4201__auto__){
@@ -166,10 +166,10 @@ return h__4061__auto____$1;
 }
 });
 
-basapp.datascript.TransactSideffect.prototype.cljs$core$IEquiv$_equiv$arity$2 = (function (this58163,other58164){
+basapp.datascript.TransactSideffect.prototype.cljs$core$IEquiv$_equiv$arity$2 = (function (this40767,other40768){
 var self__ = this;
-var this58163__$1 = this;
-return ((!((other58164 == null))) && ((this58163__$1.constructor === other58164.constructor)) && (cljs.core._EQ_.call(null,this58163__$1.transactions,other58164.transactions)) && (cljs.core._EQ_.call(null,this58163__$1.__extmap,other58164.__extmap)));
+var this40767__$1 = this;
+return ((!((other40768 == null))) && ((this40767__$1.constructor === other40768.constructor)) && (cljs.core._EQ_.call(null,this40767__$1.transactions,other40768.transactions)) && (cljs.core._EQ_.call(null,this40767__$1.__extmap,other40768.__extmap)));
 });
 
 basapp.datascript.TransactSideffect.prototype.cljs$core$IMap$_dissoc$arity$2 = (function (this__4212__auto__,k__4213__auto__){
@@ -182,15 +182,15 @@ return (new basapp.datascript.TransactSideffect(self__.transactions,self__.__met
 }
 });
 
-basapp.datascript.TransactSideffect.prototype.cljs$core$IAssociative$_assoc$arity$3 = (function (this__4210__auto__,k__4211__auto__,G__58161){
+basapp.datascript.TransactSideffect.prototype.cljs$core$IAssociative$_assoc$arity$3 = (function (this__4210__auto__,k__4211__auto__,G__40765){
 var self__ = this;
 var this__4210__auto____$1 = this;
-var pred__58168 = cljs.core.keyword_identical_QMARK_;
-var expr__58169 = k__4211__auto__;
-if(cljs.core.truth_(pred__58168.call(null,new cljs.core.Keyword(null,"transactions","transactions",-1425846118),expr__58169))){
-return (new basapp.datascript.TransactSideffect(G__58161,self__.__meta,self__.__extmap,null));
+var pred__40771 = cljs.core.keyword_identical_QMARK_;
+var expr__40772 = k__4211__auto__;
+if(cljs.core.truth_(pred__40771.call(null,new cljs.core.Keyword(null,"transactions","transactions",-1425846118),expr__40772))){
+return (new basapp.datascript.TransactSideffect(G__40765,self__.__meta,self__.__extmap,null));
 } else {
-return (new basapp.datascript.TransactSideffect(self__.transactions,self__.__meta,cljs.core.assoc.call(null,self__.__extmap,k__4211__auto__,G__58161),null));
+return (new basapp.datascript.TransactSideffect(self__.transactions,self__.__meta,cljs.core.assoc.call(null,self__.__extmap,k__4211__auto__,G__40765),null));
 }
 });
 
@@ -200,10 +200,10 @@ var this__4215__auto____$1 = this;
 return cljs.core.seq.call(null,cljs.core.concat.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [(new cljs.core.MapEntry(new cljs.core.Keyword(null,"transactions","transactions",-1425846118),self__.transactions,null))], null),self__.__extmap));
 });
 
-basapp.datascript.TransactSideffect.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = (function (this__4202__auto__,G__58161){
+basapp.datascript.TransactSideffect.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = (function (this__4202__auto__,G__40765){
 var self__ = this;
 var this__4202__auto____$1 = this;
-return (new basapp.datascript.TransactSideffect(self__.transactions,G__58161,self__.__extmap,self__.__hash));
+return (new basapp.datascript.TransactSideffect(self__.transactions,G__40765,self__.__extmap,self__.__hash));
 });
 
 basapp.datascript.TransactSideffect.prototype.cljs$core$ICollection$_conj$arity$2 = (function (this__4208__auto__,entry__4209__auto__){
@@ -240,27 +240,27 @@ return (new basapp.datascript.TransactSideffect(transactions,null,null,null));
 /**
  * Factory function for basapp.datascript/TransactSideffect, taking a map of keywords to field values.
  */
-basapp.datascript.map__GT_TransactSideffect = (function basapp$datascript$map__GT_TransactSideffect(G__58165){
-var extmap__4236__auto__ = (function (){var G__58171 = cljs.core.dissoc.call(null,G__58165,new cljs.core.Keyword(null,"transactions","transactions",-1425846118));
-if(cljs.core.record_QMARK_.call(null,G__58165)){
-return cljs.core.into.call(null,cljs.core.PersistentArrayMap.EMPTY,G__58171);
+basapp.datascript.map__GT_TransactSideffect = (function basapp$datascript$map__GT_TransactSideffect(G__40769){
+var extmap__4236__auto__ = (function (){var G__40774 = cljs.core.dissoc.call(null,G__40769,new cljs.core.Keyword(null,"transactions","transactions",-1425846118));
+if(cljs.core.record_QMARK_.call(null,G__40769)){
+return cljs.core.into.call(null,cljs.core.PersistentArrayMap.EMPTY,G__40774);
 } else {
-return G__58171;
+return G__40774;
 }
 })();
-return (new basapp.datascript.TransactSideffect(new cljs.core.Keyword(null,"transactions","transactions",-1425846118).cljs$core$IFn$_invoke$arity$1(G__58165),null,cljs.core.not_empty.call(null,extmap__4236__auto__),null));
+return (new basapp.datascript.TransactSideffect(new cljs.core.Keyword(null,"transactions","transactions",-1425846118).cljs$core$IFn$_invoke$arity$1(G__40769),null,cljs.core.not_empty.call(null,extmap__4236__auto__),null));
 });
 
 basapp.datascript.transact_BANG_ = (function basapp$datascript$transact_BANG_(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___58191 = arguments.length;
-var i__4532__auto___58192 = (0);
+var len__4531__auto___40777 = arguments.length;
+var i__4532__auto___40778 = (0);
 while(true){
-if((i__4532__auto___58192 < len__4531__auto___58191)){
-args__4534__auto__.push((arguments[i__4532__auto___58192]));
+if((i__4532__auto___40778 < len__4531__auto___40777)){
+args__4534__auto__.push((arguments[i__4532__auto___40778]));
 
-var G__58193 = (i__4532__auto___58192 + (1));
-i__4532__auto___58192 = G__58193;
+var G__40779 = (i__4532__auto___40778 + (1));
+i__4532__auto___40778 = G__40779;
 continue;
 } else {
 }
@@ -278,21 +278,21 @@ return basapp.datascript.__GT_TransactSideffect.call(null,cljs.core.apply.call(n
 basapp.datascript.transact_BANG_.cljs$lang$maxFixedArity = (0);
 
 /** @this {Function} */
-basapp.datascript.transact_BANG_.cljs$lang$applyTo = (function (seq58190){
+basapp.datascript.transact_BANG_.cljs$lang$applyTo = (function (seq40776){
 var self__4519__auto__ = this;
-return self__4519__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq58190));
+return self__4519__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq40776));
 });
 
 basapp.datascript.q_GT_ = (function basapp$datascript$q_GT_(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___58197 = arguments.length;
-var i__4532__auto___58198 = (0);
+var len__4531__auto___40783 = arguments.length;
+var i__4532__auto___40784 = (0);
 while(true){
-if((i__4532__auto___58198 < len__4531__auto___58197)){
-args__4534__auto__.push((arguments[i__4532__auto___58198]));
+if((i__4532__auto___40784 < len__4531__auto___40783)){
+args__4534__auto__.push((arguments[i__4532__auto___40784]));
 
-var G__58199 = (i__4532__auto___58198 + (1));
-i__4532__auto___58198 = G__58199;
+var G__40785 = (i__4532__auto___40784 + (1));
+i__4532__auto___40784 = G__40785;
 continue;
 } else {
 }
@@ -319,13 +319,13 @@ return null;
 basapp.datascript.q_GT_.cljs$lang$maxFixedArity = (2);
 
 /** @this {Function} */
-basapp.datascript.q_GT_.cljs$lang$applyTo = (function (seq58194){
-var G__58195 = cljs.core.first.call(null,seq58194);
-var seq58194__$1 = cljs.core.next.call(null,seq58194);
-var G__58196 = cljs.core.first.call(null,seq58194__$1);
-var seq58194__$2 = cljs.core.next.call(null,seq58194__$1);
+basapp.datascript.q_GT_.cljs$lang$applyTo = (function (seq40780){
+var G__40781 = cljs.core.first.call(null,seq40780);
+var seq40780__$1 = cljs.core.next.call(null,seq40780);
+var G__40782 = cljs.core.first.call(null,seq40780__$1);
+var seq40780__$2 = cljs.core.next.call(null,seq40780__$1);
 var self__4518__auto__ = this;
-return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__58195,G__58196,seq58194__$2);
+return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__40781,G__40782,seq40780__$2);
 });
 
 basapp.datascript.entity_GT_ = (function basapp$datascript$entity_GT_(ctx,id){
@@ -338,4 +338,4 @@ return null;
 }
 });
 
-//# sourceMappingURL=datascript.js.map?rel=1563552882968
+//# sourceMappingURL=datascript.js.map?rel=1568104886950

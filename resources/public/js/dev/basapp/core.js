@@ -46,4 +46,4 @@ return basapp.core.start_app_BANG_.call(null);
 });
 goog.exportSymbol('basapp.core.main', basapp.core.main);
 
-//# sourceMappingURL=core.js.map?rel=1563559530180
+//# sourceMappingURL=core.js.map?rel=1568199597446
