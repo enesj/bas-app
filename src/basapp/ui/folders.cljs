@@ -2,6 +2,7 @@
   (:require [keechma.ui-component :as ui]
             [keechma.toolbox.ui :refer [<cmd route> sub>]]
             [basapp.datascript :refer [q> entity>]]
+            [basapp.domain.seed :refer [insert-folder]]
             [basapp.util :as util]
             [basapp.ui.antd  :as ant]
             [reagent.core :as r]))
@@ -20,18 +21,21 @@
    {:title "Opis" :dataIndex "description"}
    {:title  "Odgovoran 1" :dataIndex "responsible1" :sorter #(comparison %1 %2 :odogovran1)
     :render (util/render-ref ctx "employee" :employee/uname (:employees data))}
-
    {:title  "Odgovoran 2" :dataIndex "responsible2" :sorter #(comparison %1 %2 :odogovran2)
     :render (util/render-ref ctx "employee" :employee/uname (:employees data))}
    {:title  "Nalazi se u:" :dataIndex "parent" :sorter #(comparison %1 %2 :parent)
     :render (util/render-ref ctx "folder" :folder/link (:folders data))}
-
-   ;{:title "Odgovoran 1" :dataIndex "responsible1"}
-   ;{:title "Parent" :dataIndex "parent"}
-   {:title    "Aktivan" :dataIndex "active" :sorter #(comparison %1 %2 :active)
-    :filters  [{:text "Da" :value true}, {:text "Ne" :value false}],
-    :onFilter (fn [value, record] (= (str (.-active record)) value))
-    :render   #(r/as-element [:div (if %1 "Da" "Ne")])}])
+   {:title  ""
+    :render #(r/as-element
+               [ant/popconfirm {:title      "Jeste li sigurni?"
+                                :on-confirm (fn [] (let [data (js->clj %1 :keywordize-keys true)]
+                                                     (<cmd ctx [:user-actions :transact] (partial insert-folder
+                                                                                                  (:link data)
+                                                                                                  (:description data)
+                                                                                                  (:id (:responsible1 data))
+                                                                                                  (:id (:responsible2 data))
+                                                                                                  false))))}
+                [ant/button {:icon "delete" :type "danger"}]])}])
 
 (defn folders-table [ctx data]
   (let [folders (:folders data)]
@@ -60,8 +64,10 @@
 (defn render [ctx]
   (let [selection (sub> ctx :filter)
         folder-id (:id (route> ctx))
-        data {:employees (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :employee/uname]])
-              :folders (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :folder/link]])}]
+        data {:employees (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :employee/uname]
+                                                                          [?e :employee/active true]])
+              :folders (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :folder/link]
+                                                                        [?e :folder/active true]])}]
     ;(js/console.log data)
     [:div
      [ant/row

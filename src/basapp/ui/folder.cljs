@@ -29,11 +29,11 @@
       [i/text ctx form-props :link {:placeholder "Link" :disabled (not= (:id data) 0)}]
       [i/text ctx form-props :description {:placeholder "Opis"}]
       [i/select ctx form-props :responsible1
-       {:options (mapv (fn [r] {:value (:db/id r) :label (:employee/name r)})
+       {:options (mapv (fn [r] {:value (:db/id r) :label (str (:employee/name r) " " (:employee/last-name r))})
                        (:employees data))
         :label "Odgovoran 1"}]
       [i/select ctx form-props :responsible2
-       {:options (mapv (fn [r] {:value (:db/id r) :label (:employee/name r)})
+       {:options (mapv (fn [r] {:value (:db/id r) :label (str (:employee/name r) " " (:employee/last-name r))})
                        (:employees data))
         :label "Odgovoran 2"}]
       [i/select ctx form-props :parent
@@ -52,8 +52,10 @@
                      (= folder-id 0) {:folder/name "Novi" :folder/last-name "folder"}
                      (> folder-id 0) (entity> ctx folder-id)
                      :default nil)
-        data {:employees (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :employee/email]])
-              :folders (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :folder/link]])
+        data {:employees (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :employee/uname]
+                                                                          [?e :employee/active true]])
+              :folders (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :folder/link]
+                                                                        [?e :folder/active true]])
               :id      folder-id}]
     (if (:folder/link folder)
       [:div

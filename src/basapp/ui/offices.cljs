@@ -2,6 +2,7 @@
   (:require [keechma.ui-component :as ui]
             [keechma.toolbox.ui :refer [<cmd route> sub>]]
             [basapp.datascript :refer [q> entity>]]
+            [basapp.domain.seed :refer [insert-office]]
             [basapp.util :as util]
             [basapp.ui.antd  :as ant]
             [reagent.core :as r]))
@@ -17,10 +18,16 @@
    {:title "Oznaka" :dataIndex "short-name" :sorter #(comparison %1 %2 :short-name)}
    {:title  "Sprat" :dataIndex "floor" :sorter #(comparison %1 %2 :floor)
     :render (util/render-ref ctx "floor" :floor/name (:floors data))}
-   {:title    "Aktivan" :dataIndex "active" :sorter #(comparison %1 %2 :active)
-    :filters  [{:text "Da" :value true}, {:text "Ne" :value false}],
-    :onFilter (fn [value, record] (= (str (.-active record)) value))
-    :render   #(r/as-element [:div (if %1 "Da" "Ne")])}])
+   {:title  ""
+    :render #(r/as-element
+               [ant/popconfirm {:title      "Jeste li sigurni?"
+                                :on-confirm (fn [] (let [data (js->clj %1 :keywordize-keys true)]
+                                                     (<cmd ctx [:user-actions :transact] (partial insert-office
+                                                                                                  (:name data)
+                                                                                                  (:short-name data)
+                                                                                                  (:id (:floor data))
+                                                                                                  false))))}
+                [ant/button {:icon "delete" :type "danger"}]])}])
 
 (defn offices-table [ctx data]
   (let [offices (:offices data)]
@@ -39,8 +46,9 @@
   (let [selection (sub> ctx :filter)
         office-id (:id (route> ctx))
         data {:floors (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :floor/short-name]])
-              :offices (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :office/short-name]])}]
-    (js/console.log data)
+              :offices (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :office/short-name]
+                                                                        [?e :office/active true]])}]
+    ;(js/console.log data)
     [:div
      [ant/row
       [ant/col util/row-style-8

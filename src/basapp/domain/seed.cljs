@@ -29,7 +29,7 @@
     :department/sector     (get-foreign-key :sector/short-name sector app-db)
     :department/active     active}])
 
-(defn insert-floor [name short-name active]
+(defn insert-floor [name short-name active app-db]
   [{:floor/name       name
     :floor/short-name short-name
     :floor/active     active}])
@@ -39,7 +39,6 @@
     :office/short-name short-name
     :office/floor      (get-foreign-key :floor/short-name floor app-db)
     :office/active     active}])
-
 
 (defn insert-folder [link description responsible1 responsible2 parent active app-db]
   [(remove-nils
@@ -53,7 +52,6 @@
   [(remove-nils
      {:folder/link         link
       :folder/parent       (get-foreign-key :folder/link parent app-db)})])
-
 
 (defn insert-employee [name last-name uname email phone category position department office active app-db]
   [{:employee/name       name

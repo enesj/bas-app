@@ -2,6 +2,7 @@
   (:require [keechma.ui-component :as ui]
             [keechma.toolbox.ui :refer [route> <cmd sub>]]
             [basapp.datascript :refer [q> entity>]]
+            [basapp.domain.seed :refer [insert-sector]]
             [basapp.util :as util]
             [basapp.ui.antd  :as ant]
             [reagent.core :as r]))
@@ -27,13 +28,19 @@
     :render #(r/as-element [:a {:on-click (fn [x] (make-filter ctx [%2]))
                                 :href     (ui/url ctx {:page "sector" :id (util/get-id %2)})} %1])}
    {:title "Oznaka" :dataIndex "short-name" :sorter #(comparison %1 %2 :short-name)}
-   {:title "Aktivan" :dataIndex "active" :sorter #(comparison %1 %2 :active)
-    :filters [{:text "Da"  :value true }, { :text "Ne" :value false }],
-    :onFilter (fn [value, record] (= (str (.-active record))  value))
-    :render #(r/as-element [:div (if  %1 "Da" "Ne")])}])
+   {:title  ""
+    :render #(r/as-element
+               [ant/popconfirm {:title      "Jeste li sigurni?"
+                                :on-confirm (fn [] (let [data (js->clj %1 :keywordize-keys true)]
+                                                     (<cmd ctx [:user-actions :transact] (partial insert-sector
+                                                                                                    (:name data)
+                                                                                                    (:short-name data)
+                                                                                                    false))))}
+                [ant/button {:icon "delete" :type "danger"}]])}])
 
 (defn sectors-table [ctx]
-  (let [sectors (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :sector/short-name]])]
+  (let [sectors (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :sector/short-name]
+                                                                [?e :sector/active true]])]
       [:div
        [:h2 {:style {:margin-top "0.5em" :margin-bottom "1em"}} "Sektori"]
        [ant/table

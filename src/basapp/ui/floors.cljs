@@ -32,10 +32,10 @@
     :render #(r/as-element
                [ant/popconfirm {:title      "Jeste li sigurni?"
                                 :on-confirm (fn [] (let [data (js->clj %1 :keywordize-keys true)]
-                                                     (<cmd ctx [:user-actions :transact] (insert-floor
-                                                                                             (:name data)
-                                                                                             (:short-name data)
-                                                                                             false))))}
+                                                     (<cmd ctx [:user-actions :transact] (partial insert-floor
+                                                                                                    (:name data)
+                                                                                                    (:short-name data)
+                                                                                                    false))))}
                 [ant/button {:icon "delete" :type "danger"}]])}])
 
 (defn floors-table [ctx]

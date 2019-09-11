@@ -41,9 +41,12 @@
                    (> employee-id 0) (entity> ctx employee-id)
                    :default nil)
         data {:employees (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :employee/uname]])
-              :departments (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :department/short-name]])
-              :offices (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :office/short-name]])
-              :floors (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :floor/short-name]])
+              :departments (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :department/short-name]
+                                                                            [?e :department/active true]])
+              :offices (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :office/short-name]
+                                                                        [?e :office/active true]])
+              :floors (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :floor/short-name]
+                                                                       [?e :floor/active true]])
               :id      employee-id}]
     (if (:employee/name employee)
       [:div

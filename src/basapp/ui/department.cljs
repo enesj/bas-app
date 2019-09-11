@@ -29,7 +29,8 @@
                      (= department-id 0) {:department/name "Novo" :department/last-name "odjeljenje"}
                      (> department-id 0) (entity> ctx department-id)
                      :default nil)
-        data {:sectors (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :sector/short-name]])
+        data {:sectors (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :sector/short-name]
+                                                                        [?e :sector/active true]])
               :departments (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :department/short-name]])
               :id      department-id}]
     (if (:department/name department)

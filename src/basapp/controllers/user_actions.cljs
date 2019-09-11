@@ -14,6 +14,6 @@
      :filter (pipeline! [value app-db]
                         (pp/commit! (assoc-in app-db [:kv :filter] value)))
      :transact (pipeline! [value app-db]
-                 (transact! value))}))
+                 (transact! (value (:datascript app-db))))}))
 
 

@@ -2,6 +2,7 @@
   (:require [keechma.ui-component :as ui]
             [keechma.toolbox.ui :refer [<cmd route> sub>]]
             [basapp.datascript :refer [q>]]
+            [basapp.domain.seed :refer [insert-employee]]
             [basapp.util :as util]
             [basapp.ui.antd  :as ant]
             [reagent.core :as r]
@@ -21,25 +22,38 @@
    {:title "E-mail" :dataIndex "email" :sorter #(comparison %1 %2 :email)}
    {:title "Odjeljenje" :dataIndex "department" :sorter #(comparison %1 %2 :department)
     :render  (util/render-ref ctx "department" :department/short-name (:departments data))}
-   {:title "Aktivan" :dataIndex "active" :sorter #(comparison %1 %2 :active)
-    :filters [{:text "Da"  :value true }, { :text "Ne" :value false }],
-    :onFilter (fn [value, record] (= (str (.-active record))  value))
-    :render #(r/as-element [:div (if  %1 "Da" "Ne")])}])
+   {:title  ""
+    :render #(r/as-element
+               [ant/popconfirm {:title      "Jeste li sigurni?"
+                                :on-confirm (fn [] (let [data (js->clj %1 :keywordize-keys true)]
+                                                     (<cmd ctx [:user-actions :transact] (partial insert-employee
+                                                                                                    (:name data)
+                                                                                                    (:last-name data)
+                                                                                                    (:uname data)
+                                                                                                    (:email data)
+                                                                                                    (:phone data)
+                                                                                                    (:type data)
+                                                                                                    (:position data)
+                                                                                                    (:id (:department data))
+                                                                                                    (:id (:office data))
+                                                                                                    false))))}
+                [ant/button {:icon "delete" :type "danger"}]])}])
 
-(defn employees-table [ctx data filter]
+(defn employees-table [ctx data filter-criteria]
   (let [employees
-        (if filter
+        (if filter-criteria
           (q> ctx
               '[:find [(pull ?e [* :db/id]) ...]
                 :in $ [?a [?b ...]]
                 :where [?e :employee/uname]
                 [?e ?a ?b]]
-              filter)
+              filter-criteria)
           (q> ctx
               '[:find [(pull ?e [* :db/id]) ...]
-                :where [?e :employee/uname]]))]
+                :where [?e :employee/uname]]))
+        employees (filter :employee/active employees)]
     [:div
-     (when-not filter [:h2 {:style {:margin-top "0.5em" :margin-bottom "1em"}} "Korisnici"])
+     (when-not filter-criteria [:h2 {:style {:margin-top "0.5em" :margin-bottom "1em"}} "Korisnici"])
      [ant/table
       {:columns    (columns ctx data)
        :dataSource employees :pagination (util/pagination " korisnika") :row-key "id"
@@ -48,7 +62,6 @@
                     #(let [selected (js->clj %2 :keywordize-keys true)]
                        (<cmd ctx [:user-actions :filter] ["employee" (mapv :id selected)])
                        (ant/message-info (str "Izabrali ste: " (map :name selected))))}}]]))
-
 
 (defn render [ctx]
   (let [[field choices selections] (sub> ctx :filter)
@@ -61,7 +74,8 @@
             (not-empty choices) [(keyword "employee" field) choices]
             id [(keyword "employee" page) [id]]
             :else nil))
-        data {:departments (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :department/short-name]])}]
+        data {:departments (q> ctx '[:find [(pull ?e [*]) ...] :in $ :where [?e :department/short-name]
+                                                                            [?e :department/active true]])}]
     [:div
      (if (= "employees" page)
        [ant/row
